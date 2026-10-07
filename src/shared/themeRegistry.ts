@@ -13,7 +13,7 @@ export interface LayoutProps {
 }
 
 export const themeLabels: Record<ThemeId, string> = {
-  netscape: 'Netscape Navigator (1996)',
+  netscape: 'Netscape Navigator (1995)',
   geocities: 'GeoCities (1998)',
   macos9: 'Mac OS 9 (1999)',
 }

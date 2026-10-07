@@ -28,6 +28,7 @@ export const sections: Section[] = [
     label: 'Home',
     title: 'Shane Lonergan',
     description: 'Shane Lonergan is a full-stack engineer in Brooklyn who works in React and Ruby on Rails.',
+    blurb: 'where you are now',
   },
   {
     id: 'projects',
@@ -35,6 +36,7 @@ export const sections: Section[] = [
     label: 'Projects',
     title: 'Projects',
     description: "Things Shane Lonergan has built with React, Rails, TypeScript and PostgreSQL.",
+    blurb: "things I've built with React, Rails and TypeScript",
   },
   {
     id: 'resume',
@@ -42,6 +44,7 @@ export const sections: Section[] = [
     label: 'Résumé',
     title: 'Résumé',
     description: "Shane Lonergan's experience and skills as a full-stack engineer.",
+    blurb: "where I've worked and what I know",
   },
   {
     id: 'bio',
@@ -49,6 +52,7 @@ export const sections: Section[] = [
     label: 'Bio',
     title: 'Bio',
     description: "Shane Lonergan's path from biology and theater to full-stack engineering, and life as a working actor and musician.",
+    blurb: 'how I got from theater to code',
   },
   {
     id: 'contact',
@@ -56,6 +60,7 @@ export const sections: Section[] = [
     label: 'Contact',
     title: 'Contact',
     description: 'How to reach Shane Lonergan: email, GitHub and LinkedIn.',
+    blurb: 'email, GitHub and LinkedIn',
   },
 ]
 

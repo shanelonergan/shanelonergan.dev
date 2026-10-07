@@ -1,6 +1,7 @@
 /*
- * Netscape Navigator, 1996: a sincere personal page on a department server.
- * Browser defaults wherever they were the defaults. Scoped so this stylesheet
+ * Netscape Navigator, 1995: a sincere personal page on a department server.
+ * One column (table layouts weren't common yet), a banner "image", a link list
+ * with little icons. Browser defaults wherever they were the defaults. Scoped so this stylesheet
  * never leaks into another theme after a switch.
  */
 
@@ -27,6 +28,13 @@
 
 [data-theme='netscape'] .ns-page {
   padding: 8px 16px 24px;
+}
+
+/* The page is a single 44em column; only the switcher reaches the far right */
+[data-theme='netscape'] .ns-nav,
+[data-theme='netscape'] .ns-main,
+[data-theme='netscape'] .ns-footer {
+  max-width: 44em;
 }
 
 /* Links, in the order Netscape applied them */
@@ -70,7 +78,7 @@
   font-family: var(--ns-mono);
 }
 
-/* The etched rule of a 1996 <hr> */
+/* The etched rule of a 1995 <hr> */
 [data-theme='netscape'] hr {
   height: 0;
   margin: 1em 0;
@@ -79,10 +87,12 @@
   border-bottom: 1px solid var(--ns-highlight);
 }
 
-/* Header row: just the switcher, top-right */
+/* Header: the switcher top-right, then the bracketed nav bar */
 [data-theme='netscape'] .ns-header {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
 }
 
 /* Switcher: a native-looking 3D control */
@@ -108,36 +118,92 @@
   border-radius: 0;
 }
 
-/* Two-column "table" layout */
-[data-theme='netscape'] .ns-columns {
-  max-width: 62em;
-  display: grid;
-  grid-template-columns: 9em minmax(0, 1fr);
-  gap: 0 24px;
-  margin-top: 8px;
+/* [ Home | Projects | Résumé | Bio | Contact ] */
+[data-theme='netscape'] .ns-nav {
+  align-self: stretch;
 }
-
 [data-theme='netscape'] .ns-nav ul {
-  margin: 1.4em 0 0;
-  padding-left: 1.2em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-
-[data-theme='netscape'] .ns-nav li {
-  margin: 0.2em 0;
+/* Brackets and pipes are decoration, not list content */
+[data-theme='netscape'] .ns-nav li:first-child::before {
+  content: '[' / '';
+  padding-right: 0.4em;
 }
-
+[data-theme='netscape'] .ns-nav li:last-child::after {
+  content: ']' / '';
+  padding-left: 0.4em;
+}
+[data-theme='netscape'] .ns-nav li + li::before {
+  content: '|' / '';
+  padding: 0 0.5em;
+}
+[data-theme='netscape'] .ns-nav a {
+  display: inline-block;
+  padding: 4px 0;
+}
 [data-theme='netscape'] .ns-nav a[aria-current='page'] {
   color: var(--ns-text);
   font-weight: bold;
   text-decoration: none;
 }
 
-[data-theme='netscape'] .ns-main {
-  max-width: 40em;
+[data-theme='netscape'] .ns-main > h1:first-child {
+  margin-top: 0.6em;
 }
 
-[data-theme='netscape'] .ns-main > h1:first-child {
-  margin-top: 0.4em;
+/* The home page banner: a beveled "GIF" with a seal and embossed lettering */
+[data-theme='netscape'] h1.ns-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 100%;
+  margin-bottom: 0.4em;
+  padding: 8px 18px 8px 10px;
+  background: linear-gradient(135deg, #e0e0e0, #a8a8a8);
+  border: 3px solid;
+  border-color: var(--ns-highlight) #404040 #404040 var(--ns-highlight);
+  box-shadow: 1px 1px 0 #000;
+}
+[data-theme='netscape'] .ns-seal {
+  flex: none;
+}
+[data-theme='netscape'] .ns-banner-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+[data-theme='netscape'] .ns-banner-small {
+  font-size: 0.5em;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #000080;
+}
+[data-theme='netscape'] .ns-banner-big {
+  font-size: 0.95em;
+  color: #000080;
+  text-shadow: 1px 1px 0 var(--ns-highlight);
+}
+
+/* The link list: an icon, a link, and "- what it is" */
+[data-theme='netscape'] .ns-iconlist {
+  margin: 1.2em 0 0;
+  padding: 0;
+  list-style: none;
+}
+[data-theme='netscape'] .ns-iconlist li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 0.9em;
+}
+[data-theme='netscape'] .ns-icon {
+  flex: none;
 }
 
 /* Projects */
@@ -213,8 +279,10 @@
 
 /* Footer */
 [data-theme='netscape'] .ns-footer {
-  max-width: 62em;
   margin-top: 1.5em;
+}
+[data-theme='netscape'] .ns-footer p {
+  overflow-wrap: anywhere;
 }
 [data-theme='netscape'] .ns-footer address {
   font-style: italic;
@@ -246,37 +314,15 @@
   color: #ffff00;
 }
 
-/* Narrow screens: the table collapses into a pipe-separated link bar */
 @media (max-width: 719px) {
-  [data-theme='netscape'] .ns-columns {
-    display: block;
-  }
-  [data-theme='netscape'] .ns-nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0.75em 0 0;
-    padding: 0 0 0.75em;
-    list-style: none;
-    border-bottom: 1px solid var(--ns-shadow);
-    box-shadow: 0 1px 0 var(--ns-highlight);
-  }
-  [data-theme='netscape'] .ns-nav li {
-    margin: 0;
-  }
-  /* Pipes are decoration, not list content */
-  [data-theme='netscape'] .ns-nav li + li::before {
-    content: '|' / '';
-    padding: 0 0.5em;
-  }
-  [data-theme='netscape'] .ns-nav a {
-    display: inline-block;
-    padding: 4px 0;
-  }
   [data-theme='netscape'] .ns-projects dd {
     margin-left: 1em;
   }
   [data-theme='netscape'] .ns-finger-field {
     display: block;
+  }
+  [data-theme='netscape'] h1.ns-banner {
+    font-size: 1.6em;
   }
 }
 
@@ -289,9 +335,6 @@
   [data-theme='netscape'] .ns-badge,
   [data-theme='netscape'] .skip-link {
     display: none;
-  }
-  [data-theme='netscape'] .ns-columns {
-    display: block;
   }
   [data-theme='netscape'] .ns-main a[href^='http']::after,
   [data-theme='netscape'] .ns-main a[href^='mailto']::after {

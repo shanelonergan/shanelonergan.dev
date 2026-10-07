@@ -155,3 +155,17 @@ Still open:
   - The acting teacher's "actors are bricklayers" line, then Oberlin and Flatiron.
   - Still acting and playing guitar, and theater and software as experiences built for an audience.
   - Buzzwords from the cover letters ("passionate" and so on) were left out on purpose.
+
+## Netscape moves to 1995 (2026-10-07)
+
+- The reference was Shane's pick: https://pspb.chrisrcook.com/tag/1995/, Netscape Navigator 1.0 screenshots of 1995 pages (BBC.co.uk on Windows 3.11).
+  - Those pages are a single column, with no table layout.
+  - They open with a beveled banner image ("WELCOME TO THE BBC").
+  - Links come as a list, each with a small icon and "- description".
+  - Contact is a plain "comments or suggestions are welcome at **address**" line.
+- **Changes:**
+  - The two-column sidebar layout is gone (that's more 1996–97). Everything is one 44em column, with a bracketed `[ Home | Projects | … ]` text nav on every page and every screen size.
+  - The home h1 is now the banner: a CSS-beveled box with an original "SL" seal SVG and "Welcome to Shane Lonergan's Home Page" lettering. It's real text, so screen readers and search engines read it.
+  - The home page's "Recent projects" list is replaced by the link list. Each section has new first-person `blurb` copy in `site.ts`, and the icons are original 24px beveled tiles in `themes/netscape/icons.tsx`.
+  - The footer reads "Comments or suggestions are welcome at <b>email</b>", then the name and "Last modified".
+  - The switcher label is now "Netscape Navigator (1995)".

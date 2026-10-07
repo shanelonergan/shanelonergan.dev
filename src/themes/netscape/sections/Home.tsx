@@ -1,34 +1,44 @@
 import { Link } from 'react-router'
 import { hotlist } from '../../../content/hotlist'
 import { projects } from '../../../content/projects'
-import { site } from '../../../content/site'
+import { sections, site } from '../../../content/site'
 import { PAGE_TITLE_ID } from '../../../shared/hooks'
-import { ProjectList } from './ProjectList'
+import { LinkIcon, Seal } from '../icons'
 
 export function Home() {
   return (
     <>
-      <h1 id={PAGE_TITLE_ID} tabIndex={-1}>
-        {site.name}
+      {/* The banner "image" of the period, drawn in CSS; it is also the page's h1 */}
+      <h1 id={PAGE_TITLE_ID} tabIndex={-1} className="ns-banner">
+        <Seal />
+        <span className="ns-banner-text">
+          <span className="ns-banner-small">Welcome to</span> <span className="ns-banner-big">{site.name}&apos;s</span>{' '}
+          <span className="ns-banner-small">Home Page</span>
+        </span>
       </h1>
+
+      <hr />
+
       <p>
         <b>{site.tagline}</b>
       </p>
       {site.intro.map((line) => (
         <p key={line}>{line}</p>
       ))}
-      <p>
-        You can <Link to="/projects">see what I&apos;ve built</Link>, <Link to="/resume">read my résumé</Link>, or
-        email me at <a href={`mailto:${site.email}`}>{site.email}</a>.
-      </p>
 
-      <hr />
-
-      <h2>Recent projects</h2>
-      <ProjectList items={projects.slice(0, 3)} />
-      <p>
-        <Link to="/projects">All {projects.length} projects</Link>
-      </p>
+      <ul className="ns-iconlist">
+        {sections
+          .filter((s) => s.id !== 'home')
+          .map((s) => (
+            <li key={s.id}>
+              <LinkIcon id={s.id} />
+              <span>
+                <Link to={s.path}>{s.id === 'projects' ? `${s.label} (${projects.length})` : s.label}</Link> -{' '}
+                {s.blurb}
+              </span>
+            </li>
+          ))}
+      </ul>
 
       <hr />
 

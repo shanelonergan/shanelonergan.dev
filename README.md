@@ -2,7 +2,7 @@
 
 My portfolio, presented three ways. The content is the same in each, but you can pick which era of the web it looks like from the **"Best viewed in:"** menu at the top right:
 
-- **Netscape Navigator (1996):** the default. A sincere personal page on a department server, with a `finger` .plan box and a Hotlist.
+- **Netscape Navigator (1995):** the default. A sincere single-column personal page with a beveled welcome banner, a link list with little icons, a `finger` .plan box and a Hotlist.
 - **GeoCities (1998):** "Shane's Home Page", in the SiliconValley neighborhood. It has a marquee you can stop, a webring, and a hit counter that only counts your own visits.
 - **Mac OS 9 (1999):** the site is a desktop. Draggable Finder windows roll up when you double-click the title bar, the menus actually work, and the startup screen has an extensions parade.
 

@@ -8,6 +8,8 @@ export interface Section {
   /** Page <title> and heading */
   title: string
   description: string
+  /** First-person one-liner for link lists ("- things I've built…") */
+  blurb: string
 }
 
 export interface Site {

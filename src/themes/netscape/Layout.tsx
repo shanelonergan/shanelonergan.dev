@@ -20,15 +20,13 @@ const views: Record<SectionId, () => React.JSX.Element> = {
   contact: Contact,
 }
 
+/** A 1995 page: one column, a bracketed text nav bar, and a plain contact line at the foot. */
 export default function NetscapeLayout({ section }: LayoutProps) {
   const View = section ? views[section.id] : NotFound
   return (
     <div className="ns-page">
       <header className="ns-header">
         <ThemeSwitcher className="ns-switcher" />
-      </header>
-
-      <div className="ns-columns">
         <nav className="ns-nav" aria-label="Site">
           <ul>
             {sections.map((s) => (
@@ -40,17 +38,21 @@ export default function NetscapeLayout({ section }: LayoutProps) {
             ))}
           </ul>
         </nav>
+      </header>
 
-        <main id="main" className="ns-main">
-          <View />
-        </main>
-      </div>
+      <main id="main" className="ns-main">
+        <View />
+      </main>
 
       <footer className="ns-footer">
         <hr />
-        <address>
-          {site.name} &lt;<a href={`mailto:${site.email}`}>{site.email}</a>&gt;
-        </address>
+        <p>
+          Comments or suggestions are welcome at{' '}
+          <b>
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+          </b>
+        </p>
+        <address>{site.name}</address>
         <p className="ns-modified">Last modified: {netscapeDate()}</p>
         <button type="button" className="ns-badge" onClick={focusSwitcher}>
           <span className="ns-badge-small">Best viewed in</span>

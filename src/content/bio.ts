@@ -9,7 +9,7 @@ export const bio: Bio = {
   ],
   facts: [
     { label: 'Lives in', value: 'Brooklyn, NY' },
-    { label: 'Builds with', value: 'React, Rails, TypeScript, PostgreSQL' },
+    { label: 'Builds with', value: 'React, Rails, TypeScript, PostgreSQL + whatever else gets the job done' },
     { label: 'Studied', value: 'Biology and theater, Oberlin College' },
     { label: 'Learned to code', value: 'Flatiron School, 2019' },
     { label: 'Plays', value: 'Guitar, self-taught for 10+ years' },

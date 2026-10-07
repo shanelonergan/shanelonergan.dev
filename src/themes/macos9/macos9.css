@@ -1,0 +1,864 @@
+/*
+ * Mac OS 9 "Platinum": the site is a desktop.
+ * Original icons and art only. Scoped under [data-theme='macos9'].
+ */
+
+@font-face {
+  font-family: 'ChicagoFLF';
+  src: url('./fonts/ChicagoFLF.woff') format('woff');
+  font-display: swap;
+}
+
+[data-theme='macos9'] {
+  --mac-desktop: #6666cc;
+  --mac-chrome: #dddddd;
+  --mac-content: #ffffff;
+  --mac-hi: #ffffff;
+  --mac-shadow: #888888;
+  --mac-line: #000000;
+  --mac-select: #ccccff;
+  --mac-stripe: #bbbbbb;
+  --mac-menu-hi: #3333cc;
+  --mac-muted: #555555;
+  --mac-chicago: 'ChicagoFLF', 'Charcoal', 'Chicago', 'Geneva', Verdana, sans-serif;
+  --mac-geneva: Geneva, Verdana, 'DejaVu Sans', sans-serif;
+  --mac-bar: 24px;
+
+  color-scheme: light;
+  background: var(--mac-desktop);
+}
+
+[data-theme='macos9'] body {
+  height: 100dvh;
+  overflow: hidden;
+  color: #000;
+  background: var(--mac-desktop);
+  font: 13px/1.45 var(--mac-geneva);
+}
+
+[data-theme='macos9'] ::selection {
+  background: var(--mac-select);
+}
+
+[data-theme='macos9'] a {
+  color: #0000cc;
+}
+[data-theme='macos9'] a:visited {
+  color: #551a8b;
+}
+
+[data-theme='macos9'] :focus-visible {
+  outline: 2px solid var(--mac-menu-hi);
+  outline-offset: 1px;
+}
+
+[data-theme='macos9'] .mac-root {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+/* ---------- Menu bar ---------- */
+
+[data-theme='macos9'] .mac-menubar {
+  position: relative;
+  z-index: 5000;
+  display: flex;
+  flex: none;
+  align-items: stretch;
+  justify-content: space-between;
+  height: var(--mac-bar);
+  padding: 0 8px;
+  font: 14px/1 var(--mac-chicago);
+  background: linear-gradient(var(--mac-hi), var(--mac-chrome) 30%);
+  border-bottom: 1px solid var(--mac-line);
+}
+
+[data-theme='macos9'] .mac-menubar-list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+[data-theme='macos9'] .mac-menu {
+  position: relative;
+}
+
+[data-theme='macos9'] .mac-menu-title {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  padding: 0 10px;
+  font: inherit;
+  color: #000;
+  background: none;
+  border: 0;
+  cursor: default;
+}
+[data-theme='macos9'] .mac-menu-title[aria-expanded='true'] {
+  color: #fff;
+  background: var(--mac-menu-hi);
+}
+[data-theme='macos9'] .mac-menu-title:focus-visible {
+  outline-offset: -2px;
+}
+
+[data-theme='macos9'] .mac-menu-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  margin: 0;
+  padding: 3px 0;
+  list-style: none;
+  background: var(--mac-chrome);
+  border: 1px solid var(--mac-line);
+  box-shadow: 2px 2px 0 rgb(0 0 0 / 35%);
+}
+[data-theme='macos9'] .mac-menu-list .has-separator {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid var(--mac-shadow);
+}
+
+[data-theme='macos9'] .mac-menu-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 4px 14px 4px 4px;
+  font: inherit;
+  text-align: left;
+  color: #000;
+  background: none;
+  border: 0;
+  cursor: default;
+}
+[data-theme='macos9'] .mac-menu-item:not([aria-disabled]):hover,
+[data-theme='macos9'] .mac-menu-item:not([aria-disabled]):focus {
+  color: #fff;
+  background: var(--mac-menu-hi);
+  outline: none;
+}
+[data-theme='macos9'] .mac-menu-item[aria-disabled] {
+  color: #808080;
+}
+[data-theme='macos9'] .mac-check {
+  flex: none;
+  width: 18px;
+  text-align: center;
+}
+[data-theme='macos9'] .mac-menu-label {
+  flex: 1;
+  white-space: nowrap;
+}
+[data-theme='macos9'] .mac-menu-hint {
+  margin-left: 24px;
+}
+
+[data-theme='macos9'] .mac-menubar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+[data-theme='macos9'] .mac-flash {
+  padding: 2px 6px;
+  font-size: 12px;
+  color: #fff;
+  background: var(--mac-menu-hi);
+}
+
+/* The switcher sits where the application menu was */
+[data-theme='macos9'] .mac-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 12px var(--mac-geneva);
+}
+[data-theme='macos9'] .mac-switcher .switcher-select {
+  appearance: none;
+  height: 20px;
+  padding: 0 22px 0 6px;
+  font: 13px var(--mac-chicago);
+  color: #000;
+  background:
+    linear-gradient(45deg, transparent 50%, #000 50%) calc(100% - 11px) 50% / 5px 5px no-repeat,
+    linear-gradient(-45deg, transparent 50%, #000 50%) calc(100% - 6px) 50% / 5px 5px no-repeat,
+    linear-gradient(var(--mac-hi), #cccccc);
+  border: 1px solid var(--mac-line);
+  border-radius: 3px;
+  box-shadow: 1px 1px 0 var(--mac-shadow);
+}
+
+/* ---------- Desktop ---------- */
+
+[data-theme='macos9'] .mac-desktop {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--mac-desktop)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' shape-rendering='crispEdges'%3E%3Crect width='1' height='1' fill='%237272d4'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%235d5dc2'/%3E%3C/svg%3E");
+  outline: none;
+}
+
+[data-theme='macos9'] .mac-icons {
+  position: absolute;
+  inset: 12px 10px 12px auto;
+  width: 96px;
+}
+[data-theme='macos9'] .mac-icons ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+[data-theme='macos9'] .mac-trash-slot {
+  margin-top: auto;
+}
+
+[data-theme='macos9'] .mac-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 92px;
+  padding: 2px;
+  font: 12px/1.2 var(--mac-geneva);
+  color: #000;
+  background: none;
+  border: 0;
+  cursor: default;
+}
+/* Labels sit on a white box, like the Finder's */
+[data-theme='macos9'] .mac-icon-label {
+  padding: 1px 4px;
+  background: var(--mac-hi);
+}
+[data-theme='macos9'] .mac-icon.is-selected svg {
+  filter: brightness(0.55);
+}
+[data-theme='macos9'] .mac-icon.is-selected .mac-icon-label {
+  color: #fff;
+  background: #000;
+}
+
+/* A sticky note doubles as the hint and the "Best viewed in" badge */
+[data-theme='macos9'] .mac-sticky {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  width: 210px;
+  padding: 10px 12px;
+  font: 12px/1.45 var(--mac-geneva);
+  background: #ffff99;
+  border: 1px solid #000;
+  box-shadow: 2px 2px 0 rgb(0 0 0 / 30%);
+}
+[data-theme='macos9'] .mac-sticky p {
+  margin: 0 0 8px;
+}
+[data-theme='macos9'] .mac-sticky-button {
+  padding: 0;
+  font: bold 12px var(--mac-geneva);
+  color: #0000cc;
+  text-decoration: underline;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+/* ---------- Windows ---------- */
+
+[data-theme='macos9'] .mac-window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100% - 16px);
+  max-height: calc(100% - var(--y, 0px) - 12px);
+  padding: 0 5px 5px;
+  background: var(--mac-chrome);
+  border: 1px solid var(--mac-line);
+  box-shadow:
+    inset 1px 1px 0 var(--mac-hi),
+    inset -1px -1px 0 var(--mac-shadow),
+    2px 2px 0 rgb(0 0 0 / 25%);
+}
+[data-theme='macos9'] .mac-window.is-zoomed {
+  inset: 8px 120px 8px 8px !important;
+  width: auto !important;
+  max-height: none;
+}
+[data-theme='macos9'] .mac-window.is-shaded {
+  padding-bottom: 0;
+}
+
+[data-theme='macos9'] .mac-titlebar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  touch-action: none;
+  user-select: none;
+}
+[data-theme='macos9'] .mac-stripes {
+  flex: 1;
+  min-width: 8px;
+  height: 11px;
+}
+[data-theme='macos9'] .mac-window.is-front .mac-stripes {
+  background: repeating-linear-gradient(var(--mac-chrome) 0 1px, var(--mac-stripe) 1px 2px);
+  box-shadow: 0 1px 0 var(--mac-hi);
+}
+[data-theme='macos9'] .mac-wintitle {
+  flex: none;
+  max-width: 60%;
+  margin: 0;
+  overflow: hidden;
+  font: 14px/22px var(--mac-chicago);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #000;
+}
+[data-theme='macos9'] .mac-window:not(.is-front) .mac-wintitle {
+  color: var(--mac-muted);
+}
+
+[data-theme='macos9'] .mac-box {
+  position: relative;
+  flex: none;
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  background: linear-gradient(135deg, var(--mac-hi), #aaaaaa);
+  border: 1px solid #444;
+  box-shadow: inset 1px 1px 0 var(--mac-hi);
+  cursor: default;
+}
+[data-theme='macos9'] .mac-box:active {
+  background: linear-gradient(135deg, #888, #ccc);
+}
+[data-theme='macos9'] .mac-window:not(.is-front) .mac-box {
+  background: var(--mac-chrome);
+  border-color: var(--mac-shadow);
+  box-shadow: none;
+}
+[data-theme='macos9'] .mac-zoombox::after {
+  content: '';
+  position: absolute;
+  inset: 1px 4px 4px 1px;
+  border: 1px solid #444;
+}
+[data-theme='macos9'] .mac-collapsebox::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 1px;
+  left: 1px;
+  height: 3px;
+  border-top: 1px solid #444;
+  border-bottom: 1px solid #444;
+}
+
+[data-theme='macos9'] .mac-winbody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--mac-content);
+  border: 1px solid var(--mac-line);
+  box-shadow: -1px -1px 0 var(--mac-shadow), 1px 1px 0 var(--mac-hi);
+}
+[data-theme='macos9'] .mac-winbody[hidden] {
+  display: none;
+}
+[data-theme='macos9'] .mac-infobar {
+  flex: none;
+  padding: 3px 8px;
+  font-size: 12px;
+  text-align: center;
+  background: var(--mac-chrome);
+  border-bottom: 1px solid var(--mac-shadow);
+}
+[data-theme='macos9'] .mac-content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+/* ---------- Window contents ---------- */
+
+[data-theme='macos9'] .mac-doc {
+  padding: 12px 16px 16px;
+}
+[data-theme='macos9'] .mac-doc p {
+  margin: 0 0 10px;
+}
+[data-theme='macos9'] .mac-doc h3 {
+  margin: 16px 0 6px;
+  font: 15px var(--mac-chicago);
+}
+[data-theme='macos9'] .mac-doc h3:first-child {
+  margin-top: 0;
+}
+/* Geneva has no bold, so emphasis is set in Chicago, as the system did */
+[data-theme='macos9'] .mac-doc h4,
+[data-theme='macos9'] .mac-doc b,
+[data-theme='macos9'] .mac-about-list dt {
+  font-family: var(--mac-chicago);
+  font-weight: normal;
+}
+[data-theme='macos9'] .mac-doc h4 {
+  margin: 14px 0 0;
+  font-size: 14px;
+}
+[data-theme='macos9'] .mac-doc ul {
+  margin: 0 0 10px;
+  padding-left: 18px;
+}
+[data-theme='macos9'] .mac-doc-title {
+  font: 20px/1.2 var(--mac-chicago);
+}
+[data-theme='macos9'] .mac-muted {
+  color: var(--mac-muted);
+}
+[data-theme='macos9'] .mac-role p.mac-muted {
+  margin-bottom: 6px;
+}
+[data-theme='macos9'] .mac-hint {
+  margin-top: 14px;
+  font-size: 12px;
+}
+
+/* Platinum push buttons */
+[data-theme='macos9'] .mac-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 14px 0 6px 4px;
+}
+[data-theme='macos9'] .mac-buttons.is-right {
+  justify-content: flex-end;
+}
+[data-theme='macos9'] .mac-button {
+  display: inline-block;
+  min-width: 72px;
+  padding: 3px 14px;
+  font: 13px/1.4 var(--mac-chicago);
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+  background: linear-gradient(var(--mac-hi), #cccccc);
+  border: 1px solid var(--mac-line);
+  border-radius: 5px;
+  box-shadow: inset -1px -1px 0 var(--mac-shadow), inset 1px 1px 0 var(--mac-hi);
+  cursor: default;
+}
+[data-theme='macos9'] .mac-button:visited {
+  color: #000;
+}
+[data-theme='macos9'] .mac-button:active {
+  background: linear-gradient(#999, #bbb);
+}
+/* The default button's heavy ring */
+[data-theme='macos9'] .mac-button.is-default {
+  box-shadow:
+    inset -1px -1px 0 var(--mac-shadow),
+    inset 1px 1px 0 var(--mac-hi),
+    0 0 0 3px var(--mac-chrome),
+    0 0 0 4px var(--mac-line);
+}
+
+/* Finder list view */
+[data-theme='macos9'] .mac-finder {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+[data-theme='macos9'] .mac-finder thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 2px 8px;
+  font-weight: normal;
+  text-align: left;
+  background: var(--mac-chrome);
+  border-right: 1px solid var(--mac-shadow);
+  border-bottom: 1px solid var(--mac-line);
+  box-shadow: inset 1px 1px 0 var(--mac-hi);
+}
+[data-theme='macos9'] .mac-finder thead th.is-sorted {
+  background: #c4c4c4;
+}
+[data-theme='macos9'] .mac-finder td,
+[data-theme='macos9'] .mac-finder tbody th {
+  padding: 1px 8px;
+  font-weight: normal;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid #eeeeee;
+}
+/* The sorted column is tinted, as in the Finder */
+[data-theme='macos9'] .mac-finder .mac-name-cell {
+  background: #f2f2f2;
+}
+[data-theme='macos9'] .mac-disclosure {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 2px 0;
+  font: inherit;
+  text-align: left;
+  color: #000;
+  background: none;
+  border: 0;
+  cursor: default;
+}
+[data-theme='macos9'] .mac-disclosure:hover span:last-child {
+  text-decoration: underline;
+}
+[data-theme='macos9'] .mac-triangle {
+  flex: none;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid #000;
+  transition: transform 120ms;
+}
+[data-theme='macos9'] .mac-disclosure[aria-expanded='true'] .mac-triangle {
+  transform: rotate(90deg);
+}
+[data-theme='macos9'] tr.is-open > * {
+  background: var(--mac-select) !important;
+}
+[data-theme='macos9'] .mac-detail-row td {
+  padding: 6px 12px 10px 34px;
+  border-bottom: 1px solid #ccc;
+}
+[data-theme='macos9'] .mac-details p {
+  margin: 0 0 4px;
+}
+[data-theme='macos9'] .mac-detail-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+[data-theme='macos9'] .mac-icon-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 16px 8px;
+  margin: 0;
+  padding: 16px;
+  list-style: none;
+}
+[data-theme='macos9'] .mac-icon-view-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #000;
+  text-align: center;
+  text-decoration: none;
+}
+[data-theme='macos9'] a.mac-icon-view-item:hover .mac-icon-view-label {
+  text-decoration: underline;
+}
+
+/* Mail compose window */
+[data-theme='macos9'] .mac-mail {
+  padding: 10px 14px 14px;
+}
+[data-theme='macos9'] .mac-mail-headers {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 8px;
+  margin: 0 0 10px;
+}
+[data-theme='macos9'] .mac-mail-headers dt {
+  font-family: var(--mac-chicago);
+  text-align: right;
+}
+[data-theme='macos9'] .mac-mail-headers dd {
+  margin: 0;
+  padding: 1px 4px;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--mac-shadow);
+  box-shadow: inset 1px 1px 0 #ccc;
+}
+[data-theme='macos9'] .mac-mail-body {
+  padding: 8px 10px;
+  border: 1px solid var(--mac-shadow);
+}
+[data-theme='macos9'] .mac-mail-body p {
+  margin: 0 0 6px;
+}
+[data-theme='macos9'] .mac-mail-body ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+[data-theme='macos9'] .mac-about-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  margin: 0 0 12px;
+}
+[data-theme='macos9'] .mac-about-list dt {
+  font-weight: bold;
+}
+[data-theme='macos9'] .mac-about-list dd {
+  margin: 0;
+}
+
+[data-theme='macos9'] .mac-keys {
+  border-collapse: collapse;
+}
+[data-theme='macos9'] .mac-keys th,
+[data-theme='macos9'] .mac-keys td {
+  padding: 4px 8px 4px 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #eeeeee;
+}
+[data-theme='macos9'] .mac-keys th {
+  white-space: nowrap;
+  font-family: var(--mac-chicago);
+  font-weight: normal;
+}
+
+[data-theme='macos9'] .mac-alert-body {
+  padding: 14px 16px 10px;
+}
+
+/* ---------- Modal alert ---------- */
+
+[data-theme='macos9'] .mac-modal-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 8000;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgb(0 0 0 / 15%);
+}
+[data-theme='macos9'] .mac-alert {
+  display: flex;
+  gap: 16px;
+  max-width: 420px;
+  padding: 18px 18px 14px;
+  background: var(--mac-chrome);
+  border: 1px solid var(--mac-line);
+  box-shadow:
+    inset 2px 2px 0 var(--mac-hi),
+    inset -2px -2px 0 var(--mac-shadow),
+    3px 3px 0 rgb(0 0 0 / 35%);
+}
+[data-theme='macos9'] .mac-alert svg {
+  flex: none;
+}
+[data-theme='macos9'] .mac-alert-title {
+  margin: 0 0 6px;
+  font: 14px var(--mac-chicago);
+}
+[data-theme='macos9'] .mac-alert p {
+  margin: 0;
+}
+
+/* ---------- Startup screen ---------- */
+
+[data-theme='macos9'] .mac-startup {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: grid;
+  place-items: center;
+  background: var(--mac-desktop);
+}
+[data-theme='macos9'] .mac-welcome {
+  width: min(340px, calc(100% - 32px));
+  padding: 22px 24px 20px;
+  text-align: center;
+  background: var(--mac-chrome);
+  border: 1px solid var(--mac-line);
+  box-shadow:
+    inset 2px 2px 0 var(--mac-hi),
+    inset -2px -2px 0 var(--mac-shadow),
+    3px 3px 0 rgb(0 0 0 / 35%);
+}
+[data-theme='macos9'] .mac-welcome-logo {
+  margin: 0;
+  font: 30px/1.1 var(--mac-chicago);
+  color: var(--mac-desktop);
+  text-shadow: 2px 2px 0 #000;
+}
+[data-theme='macos9'] .mac-welcome-text {
+  margin: 8px 0 14px;
+  font: 14px var(--mac-chicago);
+}
+[data-theme='macos9'] .mac-progress {
+  height: 12px;
+  background: var(--mac-hi);
+  border: 1px solid var(--mac-line);
+}
+[data-theme='macos9'] .mac-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: repeating-linear-gradient(90deg, #5555bb 0 6px, #7777dd 6px 12px);
+  animation: mac-progress 1.6s linear forwards;
+}
+@keyframes mac-progress {
+  to {
+    width: 100%;
+  }
+}
+[data-theme='macos9'] .mac-parade {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+[data-theme='macos9'] .mac-parade li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 78px;
+  font: 11px/1.2 var(--mac-geneva);
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  animation: mac-appear 1ms forwards;
+}
+@keyframes mac-appear {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------- Narrow screens: one full-screen window at a time ---------- */
+
+@media (max-width: 719px) {
+  [data-theme='macos9'] {
+    --mac-bar: 44px;
+  }
+  [data-theme='macos9'] .mac-menubar {
+    padding: 0 4px;
+  }
+  [data-theme='macos9'] .mac-clock {
+    display: none;
+  }
+  [data-theme='macos9'] .mac-switcher .switcher-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  [data-theme='macos9'] .mac-switcher .switcher-select {
+    height: 32px;
+    max-width: 46vw;
+  }
+  [data-theme='macos9'] .mac-menu-list {
+    position: fixed;
+    top: var(--mac-bar);
+    left: 4px;
+    min-width: min(260px, calc(100vw - 8px));
+  }
+  [data-theme='macos9'] .mac-menu-item {
+    padding-block: 10px;
+  }
+
+  [data-theme='macos9'] .mac-icons {
+    position: static;
+    width: auto;
+    padding: 16px 12px;
+  }
+  [data-theme='macos9'] .mac-icons ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px 8px;
+    height: auto;
+  }
+  [data-theme='macos9'] .mac-icon {
+    width: 100%;
+    font-size: 13px;
+  }
+  [data-theme='macos9'] .mac-trash-slot {
+    margin-top: 0;
+  }
+  [data-theme='macos9'] .mac-sticky {
+    position: static;
+    width: auto;
+    margin: 0 16px;
+  }
+
+  [data-theme='macos9'] .mac-window {
+    inset: 0 !important;
+    width: auto !important;
+    max-width: none;
+    max-height: none;
+  }
+  [data-theme='macos9'] .mac-window:not(.is-front) {
+    display: none;
+  }
+  [data-theme='macos9'] .mac-window.is-shaded {
+    bottom: auto !important;
+  }
+  [data-theme='macos9'] .mac-titlebar {
+    height: 40px;
+  }
+  [data-theme='macos9'] .mac-box {
+    width: 26px;
+    height: 26px;
+  }
+  [data-theme='macos9'] .mac-zoombox {
+    display: none;
+  }
+  [data-theme='macos9'] .mac-collapsebox::after {
+    top: 10px;
+    right: 4px;
+    left: 4px;
+  }
+  [data-theme='macos9'] .mac-wintitle {
+    font-size: 16px;
+    line-height: 40px;
+  }
+  [data-theme='macos9'] body {
+    font-size: 15px;
+  }
+  [data-theme='macos9'] .mac-finder {
+    font-size: 15px;
+  }
+  [data-theme='macos9'] .mac-disclosure {
+    padding: 8px 0;
+  }
+}
+
+@media (max-width: 400px) {
+  [data-theme='macos9'] .mac-col-kind {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme='macos9'] .mac-triangle {
+    transition: none;
+  }
+}

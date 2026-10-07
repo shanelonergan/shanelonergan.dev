@@ -2,7 +2,7 @@ import { Suspense, useEffect, useLayoutEffect } from 'react'
 import { useLocation } from 'react-router'
 import { sectionForPath } from './content/site'
 import { Announcer, announce } from './shared/announce'
-import { useFocusPageTitle } from './shared/hooks'
+import { useFocusPageTitle, type NavState } from './shared/hooks'
 import { pageTitle } from './shared/meta'
 import { ThemeProvider, useTheme } from './shared/ThemeProvider'
 import { layouts, themeLabels, type ThemeId } from './shared/themeRegistry'
@@ -16,7 +16,7 @@ function Ready() {
 }
 
 function Shell() {
-  const { pathname } = useLocation()
+  const { pathname, state } = useLocation()
   const { theme, switchCount } = useTheme()
   const section = sectionForPath(pathname) ?? null
   const Layout = layouts[theme]
@@ -34,7 +34,7 @@ function Shell() {
     if (switchCount > 0) announce(`Now viewing in ${themeLabels[theme]}`)
   }, [theme, switchCount])
 
-  useFocusPageTitle(pathname, switchCount)
+  useFocusPageTitle(!(state as NavState | null)?.keepFocus, pathname, switchCount)
 
   return (
     <>

@@ -7,7 +7,7 @@ A running log of design decisions and what was tried, so a later session can pic
 - [x] Phase 1: plan approved (2026-10-06)
 - [x] Phase 2: foundation and the Netscape theme
 - [x] Phase 3: GeoCities
-- [ ] Phase 4: Mac OS 9
+- [x] Phase 4: Mac OS 9
 - [ ] Phase 5: polish (Playwright smoke and axe tests, Lighthouse, og.png, README)
 
 ## Architecture decisions
@@ -56,6 +56,38 @@ A running log of design decisions and what was tried, so a later session can pic
 - **Webring:** the "Brooklyn Coders Ring", which rings around the site's own sections. The component is keyed by section, so "Random" re-rolls on every page and is never the current one.
 - **Fonts:** Comic Neue 700, latin subset only, via `@fontsource/comic-neue` (OFL, bundled with the lazy chunk). Body text is Verdana.
 - **After the first screenshots:** the h2 at the top of each box had a big gap, so the first child's margin is now 0. I also added the Broadway border so the hobbies page feels like a different neighborhood.
+
+## Mac OS 9 (1999)
+
+- **Window manager:** `windows.ts`, a reducer with open, focus, close, shade, zoom, move, Clean Up, reset and projectsView.
+  - Section windows map 1:1 to routes. "About This Shane", "Keyboard Help" and the 404 alert are utility windows that don't change the URL.
+- **Route ↔ window:**
+  - Arriving at a route (link, back button, reload) opens its window.
+  - The window manager's own navigations carry `state.wm` so that sync ignores them.
+  - Clicking or tabbing into a window brings it to the front and updates the URL with `keepFocus`. That's why `useFocusPageTitle` now takes an `enabled` flag: it stops focus being yanked to the title while you tab into a window's links.
+  - Closing the last window goes to `/` with an empty desktop. A reload of `/` opens About Me.
+- **Focus and headings:** the front window's title is `#page-title`, the global focus target. All window titles are h2, under an sr-only h1 "Shane Lonergan's desktop", which keeps heading order sequential for axe and Lighthouse.
+- **Closing a window** with Esc or the close box returns focus to that window's desktop icon, falling back to the menu bar.
+- **Menu bar:** the WAI-ARIA menubar pattern (`MenuBar.tsx`) with roving tabindex. Disabled Undo/Cut/Paste are period texture.
+  - Below 720px it condenses to one "Windows" menu, and the switcher's label is visually hidden.
+- **Icons:** click selects, double-click, Enter or Space opens, and a touch tap opens. The sticky note and the About Me text say "Tap" on coarse pointers.
+- **Dragging:** only with `(pointer: fine) and (min-width: 720px)`. It keeps at least 60px of the title bar on screen. The window-shade has a keyboard equivalent in the collapse box (`aria-expanded`).
+- **Below 720px:** windows are full-screen and only the front one is shown. The icons become a 3-column grid. Icons and the sticky are made `inert` while a window covers them.
+- **Startup:** "Welcome to Shane OS" plus an extensions parade of original puzzle pieces, labelled in text only.
+  - It lasts 1.8s and is `aria-hidden`; any key, click or tap skips it.
+  - It plays once per session (sessionStorage `startup-seen`), never under reduced motion, and Special → Restart replays it.
+  - The screenshot script sets the flag so review shots skip it.
+- **Empty Trash…:** the only modal. It uses `role=alertdialog` and `aria-modal`, makes the rest of the desktop `inert`, traps Tab on OK and restores focus on close.
+- **Fonts:**
+  - ChicagoFLF is vendored as woff (22KB) from the `chicago.css` npm package. It's public domain per Robin Casady's statement, copied to `src/themes/macos9/fonts/README.ChicagoFLF.txt`. There's no woff2 because no converter was available locally.
+  - Geneva has no bold, so emphasis (h4, `<b>`) is set in Chicago, which is also what the period did.
+- **Originals only:** a pixel-sparkle glyph replaces the system-menu logo, and the folder, document, mail, trash, disk and alert icons are drawn from scratch.
+- **After the first screenshots:**
+  - The asterisk glyph read as a plain `*`, so it became the SVG sparkle.
+  - The Finder rows were misaligned, so cells are now vertically centered.
+  - Bold text was disappearing in Geneva, so emphasis uses Chicago.
+  - The "Double-click" hint was wrong on touch, so it adapts.
+- **Accessibility:** axe is clean for every theme × route at 390 and 1280. GeoCities needed its theme bar wrapped in an `<aside>` and the construction stripe moved inside `<header>`.
 
 ## Content TODOs for Shane
 

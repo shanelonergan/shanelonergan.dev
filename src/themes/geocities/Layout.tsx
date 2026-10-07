@@ -36,16 +36,15 @@ export default function GeoCitiesLayout({ section }: LayoutProps) {
 
   return (
     <div className="gc-page">
-      <div className="gc-topbar">
+      <aside className="gc-topbar" aria-label="Theme">
         <ThemeSwitcher className="gc-switcher" />
-      </div>
+      </aside>
 
       <div className={`gc-panel${section?.id === 'hobbies' ? ' is-broadway' : ''}`}>
-        <div className="gc-construction">
-          <span>This page is always under construction!</span>
-        </div>
-
         <header className="gc-header">
+          <div className="gc-construction">
+            <span>This page is always under construction!</span>
+          </div>
           <p className="gc-welcome">
             <span aria-hidden="true">★ </span>Welcome to<span aria-hidden="true"> ★</span>
           </p>

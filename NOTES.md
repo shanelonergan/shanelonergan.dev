@@ -135,7 +135,12 @@ Still open:
   - It's a manual CLI deploy of `dist/`, not linked to Git yet.
   - The local `netlify-cli` is 2.25, and its interactive `sites:create` crashes on Node 24. Create sites with `netlify api createSite` instead.
   - Redeploy with `npm run build && netlify deploy --prod --dir dist --site 0d137acb-2966-4730-aafa-d68c4ee08043`.
-- **Production:** `shanelonergan.dev` is still attached to the old Netlify site `shane-lonergan-portfolio`, which serves the January portfolio. To cut over, move the custom domain from that site to this one, or link this site to the GitHub repo first.
+- **Production (cut over 2026-10-07):** `shanelonergan.dev` now points at `shanelonergan-90s`.
+  - The custom domain was removed from the old site (`shane-lonergan-portfolio`, repo `new-portfolio`), which is still reachable at its `.netlify.app` URL, and set on the new one.
+  - Then `configureDNSForSite` recreated the `www` NETLIFY record, and `force_ssl` was turned on.
+  - DNS is Netlify DNS (zone `5e364e1749a8d80754010372`). The `blog.` records in the same zone were left alone.
+  - The certificate is Netlify's wildcard for `*.shanelonergan.dev`, already issued, so `provisionSiteTLSCertificate` returned 422 because there was nothing to do.
+  - To roll back, swap `custom_domain` back to the old site the same way.
 
 ## Bio replaces Hobbies (2026-10-07)
 

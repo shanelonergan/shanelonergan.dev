@@ -12,13 +12,12 @@ export const site: Site = {
   email: 'sptlonergan@gmail.com',
   github: 'https://github.com/shanelonergan',
   linkedin: 'https://linkedin.com/in/shane-lonergan',
-  resumePdf: null, // TODO(shane): add /public/shane-lonergan-resume.pdf, then set to '/shane-lonergan-resume.pdf'
+  resumePdf: '/shane-lonergan-resume.pdf',
   url: 'https://shanelonergan.dev',
   plan: [
     // TODO(shane): keep this current
     'Building: Seen, an audition tracker for my own iPhone.',
     'Practicing: modes and improvising over changes.',
-    'Looking for: a full-stack role on a small, kind team.', // TODO(shane): is this true right now?
   ],
 }
 

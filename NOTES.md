@@ -46,10 +46,13 @@ A running log of design decisions and what was tried, so a later session can pic
 
 ## Content TODOs for Shane
 
-`grep -rn "TODO(shane)" src/` lists them all. The main ones:
-- **Experience:** confirm "Digital Solutions Co.", which looks like a placeholder name.
-- **Projects:** decide whether Seen, a private beta, should be listed and whether it should come first. Right now the first project a recruiter sees has no link.
-- **Résumé:** add the PDF to `public/` and set `site.resumePdf`.
-- **Hobbies:** list some showtunes (titles only), add theatre specifics, and decide on the keyboards line.
-- **Hotlist:** add your real favourites.
-- **.plan:** check the "Looking for" line is still true.
+`grep -rn "TODO(shane)" src/` lists them all. Resolved on 2026-10-06:
+- **Employer:** Church Pension Group. Contract from Jul 2020, then Software Developer I from Jan 2021 to May 2023. Taken from the résumé PDF.
+- **Seen:** stays first for now.
+- **.plan:** the "Looking for" line is cut.
+- **Résumé PDF:** in `public/`. Note that it includes a phone number, which becomes public once the site is deployed.
+
+Still open:
+- **Hobbies:** showtunes (Shane will come back to these), theatre specifics, and whether to keep the keyboards line.
+- **Hotlist:** real favourites.
+- **Copy:** review the project one-liners.

@@ -15,6 +15,7 @@ export const hobbies: Hobbies = {
       title: 'Musical theatre',
       body: [
         "I'm a working actor and musician, and I perform musical theatre.", // TODO(shane): add specifics (recent shows, roles)
+        'I studied theater (and biology) at Oberlin, and acting and directing still shape how I work: rehearsal is just iteration with an audience.',
       ],
     },
     {

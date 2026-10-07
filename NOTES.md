@@ -126,3 +126,12 @@ Still open:
 - **Hobbies:** showtunes (Shane will come back to these), theatre specifics, and whether to keep the keyboards line.
 - **Hotlist:** real favourites.
 - **Copy:** review the project one-liners.
+
+## Deploys
+
+- **GitHub:** https://github.com/shanelonergan/shanelonergan.dev (public), pushed 2026-10-06.
+- **Test site:** https://shanelonergan-90s.netlify.app (Netlify site `shanelonergan-90s`, id `0d137acb-2966-4730-aafa-d68c4ee08043`).
+  - It's a manual CLI deploy of `dist/`, not linked to Git yet.
+  - The local `netlify-cli` is 2.25, and its interactive `sites:create` crashes on Node 24. Create sites with `netlify api createSite` instead.
+  - Redeploy with `npm run build && netlify deploy --prod --dir dist --site 0d137acb-2966-4730-aafa-d68c4ee08043`.
+- **Production:** `shanelonergan.dev` is still attached to the old Netlify site `shane-lonergan-portfolio`, which serves the January portfolio. To cut over, move the custom domain from that site to this one, or link this site to the GitHub repo first.

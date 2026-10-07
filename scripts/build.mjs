@@ -30,4 +30,14 @@ for (const route of routes) {
   console.log(`prerendered ${route} → ${file.replace(root + '/', '')}`)
 }
 
+// Sitemap from the same route list (the 404 page is excluded)
+const lastmod = process.env.BUILD_DATE.slice(0, 10)
+const urls = routes
+  .filter((r) => r !== '/404')
+  .map((r) => `  <url><loc>https://shanelonergan.dev${r === '/' ? '/' : r}</loc><lastmod>${lastmod}</lastmod></url>`)
+await writeFile(
+  resolve(dist, 'sitemap.xml'),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`,
+)
+
 await rm(ssrOut, { recursive: true, force: true })

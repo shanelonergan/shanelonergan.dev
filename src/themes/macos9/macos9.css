@@ -355,6 +355,10 @@
   inset: 1px 4px 4px 1px;
   border: 1px solid #444;
 }
+/* Zoom and collapse sit far enough apart for 24px target spacing (WCAG 2.5.8) */
+[data-theme='macos9'] .mac-collapsebox {
+  margin-left: 6px;
+}
 [data-theme='macos9'] .mac-collapsebox::after {
   content: '';
   position: absolute;

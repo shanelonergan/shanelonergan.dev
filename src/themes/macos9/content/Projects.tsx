@@ -12,7 +12,7 @@ function Details({ p }: { p: Project }) {
       <p className="mac-detail-links">
         {p.liveUrl && (
           <a href={p.liveUrl}>
-            Open site<span className="sr-only">: {p.name}</span>
+            Open site<span className="sr-only"> for {p.name}</span>
           </a>
         )}
         {p.repoUrl && (

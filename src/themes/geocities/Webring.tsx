@@ -25,17 +25,17 @@ export function Webring({ current }: { current: SectionId | null }) {
       <ul>
         <li>
           <Link to={prev.path}>
-            <span aria-hidden="true">◄ </span>Prev<span className="sr-only">ious: {prev.label}</span>
+            <span aria-hidden="true">◄ </span>Prev<span className="sr-only"> ({prev.label})</span>
           </Link>
         </li>
         <li>
           <Link to={random.path}>
-            Random<span className="sr-only">: {random.label}</span>
+            Random<span className="sr-only"> ({random.label})</span>
           </Link>
         </li>
         <li>
           <Link to={next.path}>
-            Next<span className="sr-only">: {next.label}</span>
+            Next<span className="sr-only"> ({next.label})</span>
             <span aria-hidden="true"> ►</span>
           </Link>
         </li>

@@ -21,12 +21,12 @@ export function Projects() {
             <p className="gc-links">
               {p.liveUrl && (
                 <a href={p.liveUrl}>
-                  Visit it<span className="sr-only">: {p.name}</span>
+                  Visit it<span className="sr-only"> ({p.name})</span>
                 </a>
               )}
               {p.repoUrl && (
                 <a href={p.repoUrl}>
-                  See the code<span className="sr-only"> for {p.name}</span>
+                  See the code<span className="sr-only"> ({p.name})</span>
                 </a>
               )}
               {p.note && <i>{p.note}</i>}

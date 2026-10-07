@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" data-theme="netscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Resolve the theme before first paint: ?theme= → localStorage → netscape.
+      ;(function () {
+        var ids = ['netscape', 'geocities', 'macos9']
+        var t = null
+        try {
+          t = new URLSearchParams(location.search).get('theme')
+        } catch (e) {}
+        if (ids.indexOf(t) >= 0) {
+          try {
+            localStorage.setItem('theme', t)
+          } catch (e) {}
+        } else {
+          try {
+            t = localStorage.getItem('theme')
+          } catch (e) {}
+        }
+        if (ids.indexOf(t) < 0) t = 'netscape'
+        document.documentElement.setAttribute('data-theme', t)
+      })()
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#c0c0c0" />
+    <!--app-head-->
+  </head>
+  <body>
+    <div id="root"><!--app-html--></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

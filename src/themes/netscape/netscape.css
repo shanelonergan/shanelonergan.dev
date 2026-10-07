@@ -1,0 +1,286 @@
+/*
+ * Netscape Navigator, 1996: a sincere personal page on a department server.
+ * Browser defaults wherever they were the defaults. Scoped so this stylesheet
+ * never leaks into another theme after a switch.
+ */
+
+[data-theme='netscape'] {
+  --ns-bg: #c0c0c0;
+  --ns-text: #000;
+  --ns-link: #0000ee;
+  --ns-visited: #551a8b;
+  --ns-active: #ff0000;
+  --ns-shadow: #808080;
+  --ns-highlight: #fff;
+  --ns-serif: 'Times New Roman', Times, 'Liberation Serif', 'Nimbus Roman', serif;
+  --ns-mono: 'Courier New', Courier, 'Liberation Mono', monospace;
+
+  color-scheme: light;
+  background: var(--ns-bg);
+}
+
+[data-theme='netscape'] body {
+  background: var(--ns-bg);
+  color: var(--ns-text);
+  font: 16px/1.25 var(--ns-serif);
+}
+
+[data-theme='netscape'] .ns-page {
+  padding: 8px 16px 24px;
+}
+
+/* Links, in the order Netscape applied them */
+[data-theme='netscape'] a {
+  color: var(--ns-link);
+}
+[data-theme='netscape'] a:visited {
+  color: var(--ns-visited);
+}
+[data-theme='netscape'] a:active {
+  color: var(--ns-active);
+}
+
+[data-theme='netscape'] :focus-visible {
+  outline: 2px dotted #000;
+  outline-offset: 2px;
+}
+
+/* Browser-default heading scale */
+[data-theme='netscape'] h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+[data-theme='netscape'] h2 {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+[data-theme='netscape'] h3 {
+  font-size: 1.17em;
+  margin: 1em 0 0.25em;
+}
+
+[data-theme='netscape'] p,
+[data-theme='netscape'] li,
+[data-theme='netscape'] dd {
+  line-height: 1.4;
+}
+
+[data-theme='netscape'] code,
+[data-theme='netscape'] pre {
+  font-family: var(--ns-mono);
+}
+
+/* The etched rule of a 1996 <hr> */
+[data-theme='netscape'] hr {
+  height: 0;
+  margin: 1em 0;
+  border: 0;
+  border-top: 1px solid var(--ns-shadow);
+  border-bottom: 1px solid var(--ns-highlight);
+}
+
+/* Header row: just the switcher, top-right */
+[data-theme='netscape'] .ns-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Switcher: a native-looking 3D control */
+[data-theme='netscape'] .ns-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+[data-theme='netscape'] .switcher-select {
+  appearance: none;
+  min-height: 28px;
+  padding: 2px 26px 2px 6px;
+  font: 14px var(--ns-serif);
+  color: #000;
+  background:
+    linear-gradient(45deg, transparent 50%, #000 50%) calc(100% - 12px) 55% / 5px 5px no-repeat,
+    linear-gradient(-45deg, transparent 50%, #000 50%) calc(100% - 7px) 55% / 5px 5px no-repeat,
+    #c0c0c0;
+  border: 2px solid;
+  border-color: var(--ns-highlight) #404040 #404040 var(--ns-highlight);
+  border-radius: 0;
+}
+
+/* Two-column "table" layout */
+[data-theme='netscape'] .ns-columns {
+  max-width: 62em;
+  display: grid;
+  grid-template-columns: 9em minmax(0, 1fr);
+  gap: 0 24px;
+  margin-top: 8px;
+}
+
+[data-theme='netscape'] .ns-nav ul {
+  margin: 1.4em 0 0;
+  padding-left: 1.2em;
+}
+
+[data-theme='netscape'] .ns-nav li {
+  margin: 0.2em 0;
+}
+
+[data-theme='netscape'] .ns-nav a[aria-current='page'] {
+  color: var(--ns-text);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+[data-theme='netscape'] .ns-main {
+  max-width: 40em;
+}
+
+[data-theme='netscape'] .ns-main > h1:first-child {
+  margin-top: 0.4em;
+}
+
+/* Projects */
+[data-theme='netscape'] .ns-projects {
+  margin: 0;
+}
+[data-theme='netscape'] .ns-project {
+  margin-bottom: 1em;
+}
+[data-theme='netscape'] .ns-projects dt {
+  font-weight: bold;
+}
+[data-theme='netscape'] .ns-projects dd {
+  margin-left: 2em;
+}
+
+/* finger output */
+[data-theme='netscape'] .ns-plan {
+  margin: 0;
+}
+[data-theme='netscape'] .ns-plan figcaption {
+  margin-bottom: 0.25em;
+}
+[data-theme='netscape'] .ns-plan pre {
+  margin: 0;
+  padding: 8px;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.3;
+  white-space: pre-wrap;
+  background: #fff;
+  border: 2px solid;
+  border-color: #404040 var(--ns-highlight) var(--ns-highlight) #404040;
+}
+
+[data-theme='netscape'] .ns-finger-row {
+  display: block;
+}
+[data-theme='netscape'] .ns-finger-field {
+  display: inline-block;
+  min-width: 32ch;
+}
+
+[data-theme='netscape'] .ns-role h3 {
+  margin-bottom: 0;
+}
+[data-theme='netscape'] .ns-dates {
+  margin: 0;
+}
+
+[data-theme='netscape'] .ns-contact dt {
+  font-weight: bold;
+}
+[data-theme='netscape'] .ns-contact dd {
+  margin: 0 0 0.75em 2em;
+  overflow-wrap: anywhere;
+}
+
+/* Footer */
+[data-theme='netscape'] .ns-footer {
+  max-width: 62em;
+  margin-top: 1.5em;
+}
+[data-theme='netscape'] .ns-footer address {
+  font-style: italic;
+  overflow-wrap: anywhere;
+}
+[data-theme='netscape'] .ns-modified {
+  margin: 0.25em 0 1em;
+  font-size: 14px;
+}
+
+/* An 88x31-style button, drawn in CSS */
+[data-theme='netscape'] .ns-badge {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 104px;
+  height: 36px;
+  padding: 0 6px;
+  font: bold 11px/1.15 Arial, Helvetica, sans-serif;
+  text-align: left;
+  color: #fff;
+  background: linear-gradient(#000080, #000060);
+  border: 2px solid;
+  border-color: #8080ff #000030 #000030 #8080ff;
+  cursor: pointer;
+}
+[data-theme='netscape'] .ns-badge-big {
+  font-size: 14px;
+  color: #ffff00;
+}
+
+/* Narrow screens: the table collapses into a pipe-separated link bar */
+@media (max-width: 719px) {
+  [data-theme='netscape'] .ns-columns {
+    display: block;
+  }
+  [data-theme='netscape'] .ns-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0.75em 0 0;
+    padding: 0 0 0.75em;
+    list-style: none;
+    border-bottom: 1px solid var(--ns-shadow);
+    box-shadow: 0 1px 0 var(--ns-highlight);
+  }
+  [data-theme='netscape'] .ns-nav li {
+    margin: 0;
+  }
+  /* Pipes are decoration, not list content */
+  [data-theme='netscape'] .ns-nav li + li::before {
+    content: '|' / '';
+    padding: 0 0.5em;
+  }
+  [data-theme='netscape'] .ns-nav a {
+    display: inline-block;
+    padding: 4px 0;
+  }
+  [data-theme='netscape'] .ns-projects dd {
+    margin-left: 1em;
+  }
+  [data-theme='netscape'] .ns-finger-field {
+    display: block;
+  }
+}
+
+@media print {
+  [data-theme='netscape'] body {
+    background: #fff;
+  }
+  [data-theme='netscape'] .ns-switcher,
+  [data-theme='netscape'] .ns-nav,
+  [data-theme='netscape'] .ns-badge,
+  [data-theme='netscape'] .skip-link {
+    display: none;
+  }
+  [data-theme='netscape'] .ns-columns {
+    display: block;
+  }
+  [data-theme='netscape'] .ns-main a[href^='http']::after,
+  [data-theme='netscape'] .ns-main a[href^='mailto']::after {
+    content: ' <' attr(href) '>';
+    font-size: 0.85em;
+  }
+}

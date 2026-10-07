@@ -1,0 +1,90 @@
+/* Shared, theme-agnostic base. Everything visual lives in the theme stylesheets. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+/*
+ * Pages are prerendered in Netscape. For any other theme, hide that markup until
+ * the theme has rendered, so visitors never see the wrong era flash. If JS never
+ * arrives, reveal it anyway after a few seconds.
+ */
+html:not([data-theme='netscape']):not(.theme-ready) #root {
+  visibility: hidden;
+  animation: reveal-fallback 0s 3s forwards;
+}
+
+@keyframes reveal-fallback {
+  to {
+    visibility: visible;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  padding: 8px 12px;
+  background: #000;
+  color: #fff;
+  font: 16px/1.2 system-ui, sans-serif;
+  transform: translateY(-120%);
+}
+
+.skip-link:focus {
+  transform: none;
+  outline: 3px solid #ff0;
+}
+
+.theme-loading {
+  margin: 0;
+  padding: 16px;
+  font: 16px/1.4 'Times New Roman', Times, serif;
+}
+
+/* h1 targets receive programmatic focus on navigation; only show a ring for keyboard focus. */
+[tabindex='-1']:focus:not(:focus-visible) {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

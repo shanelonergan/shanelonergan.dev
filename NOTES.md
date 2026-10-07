@@ -190,7 +190,7 @@ Still open:
   - The AudioContext is created only on the click; a test proves none exists on load. Leaving the theme stops the song.
 - **New content:** `bio.interests` and `bio.wantToMeet`. The latter is marked `TODO(shane)`.
 - **Flavor I made up:** "Mood: inspired", "Online Now!", the blinkie texts ("React kid", "Rails 4 life", "theatre nerd"), "(They're projects. Shane is fine.)" and "Layout by Shane".
-- **Profile pic:** an original SVG of a guitar in a spotlight. It's marked `TODO(shane)` in case a real photo should go there.
+- **Profile pic:** Shane's own photo (blazer, holding a mechanical keyboard), supplied 2026-10-07. It's cropped to 3:4 (300×400 for 2x screens, shown at 150×200) and re-encoded through a canvas, so no EXIF or camera metadata ships. It's 19KB at `src/themes/myspace/shane.jpg` and loads only with the MySpace chunk.
 - **Fixes after the first screenshots:**
   - The phone order buried the Top 8.
   - Seen and shanelonergan.com both showed "S" initials.

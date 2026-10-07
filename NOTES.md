@@ -125,7 +125,6 @@ A running log of design decisions and what was tried, so a later session can pic
 Resolved on 2026-10-07: the Hobbies section was cut and replaced by a **Bio** (`/bio`). `/hobbies` redirects there.
 
 Still open:
-- **Bio:** review the draft in `src/content/bio.ts`. I wrote it from the résumé and the old About copy.
 - **Hotlist:** real favourites.
 - **Copy:** review the project one-liners.
 
@@ -146,3 +145,8 @@ Still open:
 - **Mac OS 9:** the "Bio" window is laid out like a Finder Get Info window: a new original person icon, right-aligned label/value rows, and the story in the "Comments:" box, where OS 9 put free text.
   - The home window was renamed "About Me" → "Read Me", so it doesn't compete with Bio. That's also more period-accurate.
 - **Redirects:** `netlify.toml` 301s `/hobbies` and `/hobbies/` to `/bio`.
+- **Bio rewrite (2026-10-07):** Shane shared cover letters and asked for "short and sweet". It's now three paragraphs:
+  - Loving to build things, from skateboards and pen spinning to theater to software, plus the engineering work.
+  - The acting teacher's "actors are bricklayers" line, then Oberlin and Flatiron.
+  - Still acting and playing guitar, and theater and software as experiences built for an audience.
+  - Buzzwords from the cover letters ("passionate" and so on) were left out on purpose.

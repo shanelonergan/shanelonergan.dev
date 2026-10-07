@@ -1,12 +1,11 @@
 import type { Bio } from './types'
 
-// TODO(shane): review the whole bio; it's drafted from your résumé and old About copy
+// Drawn from Shane's résumé, old About copy and cover letters
 export const bio: Bio = {
   paragraphs: [
-    "I'm a full-stack engineer in Brooklyn. I work mostly in React and Ruby on Rails, and I've spent the last five-plus years building web apps and untangling old ones: first at Church Pension Group, where I rewrote a Rails front end in React and turned a full-stack app into an API, and now as a freelancer.",
-    'I came to code sideways. I studied biology and theater at Oberlin, then spent years acting, directing and working in customer service, looking for work that used both halves of my brain. I found it at Flatiron School in 2019.',
-    "I'm still a working actor and musician. I perform musical theatre, and I've taught myself guitar over more than a decade; lately I'm learning theory so I can improvise on purpose.",
-    'The two jobs have more in common than you would think. Rehearsal is iteration with an audience: you try something, you get notes, you try it again. I bring the same habit to code reviews, and the same care about the person on the other side of the screen.',
+    "I love building things. Over the years that's meant skateboards, the perfect pen for spinning through my fingers, theater and, since 2019, software. I'm a full-stack engineer in Brooklyn, working mostly in React and Ruby on Rails: first at Church Pension Group, where I rewrote a Rails front end in React and turned a full-stack app into an API, and now as a freelancer.",
+    'My acting teacher says actors are bricklayers: you build a character one carefully considered brick at a time, and if you are lucky you step back and see a house standing. I studied biology and theater at Oberlin, and when I learned to code at Flatiron School, I found out programmers are bricklayers too.',
+    "I'm still a working actor and musician. I perform musical theatre and have taught myself guitar over more than a decade. Theater and software are both about building an experience for an audience, and I bring the same care to the person on the other side of the screen.",
   ],
   facts: [
     { label: 'Lives in', value: 'Brooklyn, NY' },

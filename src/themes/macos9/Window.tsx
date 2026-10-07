@@ -114,7 +114,10 @@ export function Window({
       </div>
       <div className="mac-winbody" id={bodyId} hidden={win.shaded}>
         {info && <div className="mac-infobar">{info}</div>}
-        <div className="mac-content">{children}</div>
+        {/* Focusable so keyboard users can scroll a window with no links in it */}
+        <div className="mac-content" tabIndex={0} role="region" aria-label={`${title} contents`}>
+          {children}
+        </div>
       </div>
     </section>
   )

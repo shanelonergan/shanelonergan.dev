@@ -4,8 +4,8 @@ import type { SectionId } from '../../content/types'
 import { netscapeDate } from '../../shared/buildInfo'
 import { ThemeSwitcher, focusSwitcher } from '../../shared/ThemeSwitcher'
 import type { LayoutProps } from '../../shared/themeRegistry'
+import { Bio } from './sections/Bio'
 import { Contact } from './sections/Contact'
-import { Hobbies } from './sections/Hobbies'
 import { Home } from './sections/Home'
 import { NotFound } from './sections/NotFound'
 import { Projects } from './sections/Projects'
@@ -16,7 +16,7 @@ const views: Record<SectionId, () => React.JSX.Element> = {
   home: Home,
   projects: Projects,
   resume: Resume,
-  hobbies: Hobbies,
+  bio: Bio,
   contact: Contact,
 }
 

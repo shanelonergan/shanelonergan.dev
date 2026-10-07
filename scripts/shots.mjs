@@ -5,7 +5,7 @@ import { chromium } from '@playwright/test'
 
 const theme = process.argv[2] ?? 'netscape'
 const base = process.argv[3] ?? 'http://localhost:4173'
-const routes = ['/', '/projects', '/resume', '/hobbies', '/contact', '/nope']
+const routes = ['/', '/projects', '/resume', '/bio', '/contact', '/nope']
 const widths = [390, 1280]
 const outDir = `screenshots/${theme}`
 

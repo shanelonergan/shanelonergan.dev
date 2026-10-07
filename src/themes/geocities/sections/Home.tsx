@@ -27,7 +27,7 @@ export function Home() {
           <a href={`mailto:${site.email}`}>E-mail me!</a> at {site.email}
         </li>
         <li>
-          <Link to="/hobbies">My interests</Link>: guitar and showtunes
+          <Link to="/bio">All about me</Link>: biology, theater and code
         </li>
       </ul>
 

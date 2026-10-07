@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState, type ReactNode } from 'react'
 import { useLocation, useNavigate } from 'react-router'
-import { hobbies } from '../../content/hobbies'
 import { projects } from '../../content/projects'
 import { site } from '../../content/site'
 import { announce } from '../../shared/announce'
@@ -8,7 +7,7 @@ import { PAGE_TITLE_ID, useMediaQuery, usePrefersReducedMotion, type NavState } 
 import { safeGet, safeSet } from '../../shared/storage'
 import { ThemeSwitcher, focusSwitcher } from '../../shared/ThemeSwitcher'
 import type { LayoutProps } from '../../shared/themeRegistry'
-import { AboutThisShane, Hobbies, KeyboardHelp, Mail, NotFoundAlert, ReadMe, Resume } from './content/Documents'
+import { AboutThisShane, BioInfo, KeyboardHelp, Mail, NotFoundAlert, ReadMe, Resume } from './content/Documents'
 import { Projects } from './content/Projects'
 import { DesktopContext, type DesktopApi } from './desktopContext'
 import { DesktopIcons } from './DesktopIcons'
@@ -31,7 +30,7 @@ const contents: Record<WinId, ReactNode> = {
   home: <ReadMe />,
   projects: <Projects />,
   resume: <Resume />,
-  hobbies: <Hobbies />,
+  bio: <BioInfo />,
   contact: <Mail />,
   about: <AboutThisShane />,
   help: <KeyboardHelp />,
@@ -40,7 +39,6 @@ const contents: Record<WinId, ReactNode> = {
 
 const info: Partial<Record<WinId, string>> = {
   projects: `${projects.length} items`,
-  hobbies: `${hobbies.items.length} items`,
 }
 
 function Clock() {

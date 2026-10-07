@@ -5,7 +5,7 @@ const headings: Record<string, string> = {
   '/': 'Shane',
   '/projects': 'Projects',
   '/resume': 'Résumé',
-  '/hobbies': 'Hobbies|Interests',
+  '/bio': 'Bio|About Me',
   '/contact': 'Contact|E-mail|Mail',
 }
 
@@ -18,7 +18,7 @@ for (const theme of THEMES) {
         // In Mac OS 9 the front window's title is the heading for the route
         const title = page.locator('#page-title')
         await expect(title).toBeVisible()
-        if (theme === 'macos9' && route === '/') await expect(title).toHaveText('About Me')
+        if (theme === 'macos9' && route === '/') await expect(title).toHaveText('Read Me')
         else await expect(title).toHaveText(new RegExp(headings[route]))
         await expect(page).toHaveTitle(/Shane Lonergan/)
       })

@@ -1,6 +1,6 @@
 // Original 32×32 pixel-style icons drawn for this site. Not traced from any system icon set.
 
-export type IconKind = 'folder' | 'document' | 'mail' | 'trash' | 'disk' | 'alert'
+export type IconKind = 'folder' | 'document' | 'mail' | 'trash' | 'disk' | 'alert' | 'person'
 
 const common = {
   viewBox: '0 0 32 32',
@@ -51,6 +51,14 @@ export function Icon({ kind, size = 32 }: { kind: IconKind; size?: number }) {
           <path d="M3 21h26v1H3z" fill="#888" />
           <path d="M5 17h6v2H5z" fill="#33cc33" />
           <path d="M20 16h7v1h-7zM20 18h7v1h-7z" fill="#666" />
+        </svg>
+      )
+    case 'person':
+      return (
+        <svg {...common} width={size} height={size}>
+          <path d="M5 2h22v28H5z" fill="#fff" stroke="#000" />
+          <path d="M16 7a4 4 0 1 1 0 8a4 4 0 1 1 0-8z" fill="#ffcc99" stroke="#000" shapeRendering="geometricPrecision" />
+          <path d="M9 26c0-5 3-8 7-8s7 3 7 8z" fill="#6666cc" stroke="#000" shapeRendering="geometricPrecision" />
         </svg>
       )
     case 'alert':

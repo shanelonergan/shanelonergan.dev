@@ -188,6 +188,21 @@
   margin: 0;
 }
 
+[data-theme='netscape'] .ns-facts {
+  margin: 0;
+}
+[data-theme='netscape'] .ns-facts div {
+  margin: 0.2em 0;
+}
+[data-theme='netscape'] .ns-facts dt {
+  display: inline;
+  font-weight: bold;
+}
+[data-theme='netscape'] .ns-facts dd {
+  display: inline;
+  margin: 0;
+}
+
 [data-theme='netscape'] .ns-contact dt {
   font-weight: bold;
 }

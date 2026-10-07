@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import { hotlist } from '../../../content/hobbies'
+import { hotlist } from '../../../content/hotlist'
 import { projects } from '../../../content/projects'
 import { site } from '../../../content/site'
 import { PAGE_TITLE_ID } from '../../../shared/hooks'

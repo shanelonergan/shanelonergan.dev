@@ -122,8 +122,10 @@ A running log of design decisions and what was tried, so a later session can pic
 - **.plan:** the "Looking for" line is cut.
 - **Résumé PDF:** in `public/`. Note that it includes a phone number, which becomes public once the site is deployed.
 
+Resolved on 2026-10-07: the Hobbies section was cut and replaced by a **Bio** (`/bio`). `/hobbies` redirects there.
+
 Still open:
-- **Hobbies:** showtunes (Shane will come back to these), theatre specifics, and whether to keep the keyboards line.
+- **Bio:** review the draft in `src/content/bio.ts`. I wrote it from the résumé and the old About copy.
 - **Hotlist:** real favourites.
 - **Copy:** review the project one-liners.
 
@@ -135,3 +137,12 @@ Still open:
   - The local `netlify-cli` is 2.25, and its interactive `sites:create` crashes on Node 24. Create sites with `netlify api createSite` instead.
   - Redeploy with `npm run build && netlify deploy --prod --dir dist --site 0d137acb-2966-4730-aafa-d68c4ee08043`.
 - **Production:** `shanelonergan.dev` is still attached to the old Netlify site `shane-lonergan-portfolio`, which serves the January portfolio. To cut over, move the custom domain from that site to this one, or link this site to the GitHub repo first.
+
+## Bio replaces Hobbies (2026-10-07)
+
+- **Content:** `src/content/bio.ts` holds the paragraphs (first person, like the rest of the site) plus short label/value facts. Showtunes, keyboards and the separate hobby entries are gone. Guitar and theatre live on in the bio text and facts. The Hotlist moved to `src/content/hotlist.ts`.
+- **Netscape:** "Bio", with a "Vital statistics" `<dl>` under the prose.
+- **GeoCities:** "All About Me!", with The Story So Far and a Fast Facts box. It stays in the Broadway neighborhood, with the marquee-bulb borders.
+- **Mac OS 9:** the "Bio" window is laid out like a Finder Get Info window: a new original person icon, right-aligned label/value rows, and the story in the "Comments:" box, where OS 9 put free text.
+  - The home window was renamed "About Me" → "Read Me", so it doesn't compete with Bio. That's also more period-accurate.
+- **Redirects:** `netlify.toml` 301s `/hobbies` and `/hobbies/` to `/bio`.

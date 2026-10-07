@@ -1,9 +1,11 @@
+import { Fragment } from 'react'
 import { education, experience, skills } from '../../../content/experience'
-import { hobbies } from '../../../content/hobbies'
+import { bio } from '../../../content/bio'
 import { site } from '../../../content/site'
 import { useDesktop } from '../desktopContext'
+import { Icon } from '../icons'
 
-/** "About Me": a SimpleText-style Read Me. */
+/** "Read Me": a SimpleText-style Read Me. */
 export function ReadMe() {
   const { openWindow, isTouch } = useDesktop()
   return (
@@ -72,27 +74,32 @@ export function Resume() {
   )
 }
 
-export function Hobbies() {
+/** "Bio", laid out like a Finder Get Info window: facts up top, the story in Comments. */
+export function BioInfo() {
   return (
-    <div className="mac-doc">
-      {hobbies.items.map((h) => (
-        <section key={h.id} aria-labelledby={`mac-hobby-${h.id}`}>
-          <h3 id={`mac-hobby-${h.id}`}>{h.title}</h3>
-          {h.body.map((p) => (
-            <p key={p}>{p}</p>
-          ))}
-        </section>
-      ))}
-      {hobbies.showtunes.length > 0 && (
-        <>
-          <h3>Showtunes I love</h3>
-          <ul>
-            {hobbies.showtunes.map((t) => (
-              <li key={t}>{t}</li>
-            ))}
-          </ul>
-        </>
-      )}
+    <div className="mac-doc mac-info">
+      <div className="mac-info-head">
+        <Icon kind="person" />
+        <p className="mac-doc-title">{site.name}</p>
+      </div>
+      <dl className="mac-info-list">
+        <dt>Kind:</dt>
+        <dd>Full-stack engineer</dd>
+        {bio.facts.map((f) => (
+          <Fragment key={f.label}>
+            <dt>{f.label}:</dt>
+            <dd>{f.value}</dd>
+          </Fragment>
+        ))}
+      </dl>
+      <h3 id="mac-comments" className="mac-info-label">
+        Comments:
+      </h3>
+      <div className="mac-comments" aria-labelledby="mac-comments" role="group">
+        {bio.paragraphs.map((p) => (
+          <p key={p}>{p}</p>
+        ))}
+      </div>
     </div>
   )
 }

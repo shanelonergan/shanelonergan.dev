@@ -1,4 +1,4 @@
-export type SectionId = 'home' | 'projects' | 'resume' | 'hobbies' | 'contact'
+export type SectionId = 'home' | 'projects' | 'resume' | 'bio' | 'contact'
 
 export interface Section {
   id: SectionId
@@ -54,16 +54,16 @@ export interface Education {
   year: string
 }
 
-export interface Hobby {
-  id: 'guitar' | 'theatre' | 'keyboards'
-  title: string
-  body: string[]
+export interface Fact {
+  label: string
+  value: string
 }
 
-export interface Hobbies {
-  items: Hobby[]
-  /** Titles only, never lyrics */
-  showtunes: string[]
+export interface Bio {
+  /** First person, plain */
+  paragraphs: string[]
+  /** Short label/value pairs: a GeoCities fact list, a Mac Get Info window */
+  facts: Fact[]
 }
 
 export interface HotlistLink {

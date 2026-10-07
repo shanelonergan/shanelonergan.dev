@@ -1,7 +1,7 @@
 import { test as base, expect, type Page } from '@playwright/test'
 
 export const THEMES = ['netscape', 'geocities', 'macos9'] as const
-export const ROUTES = ['/', '/projects', '/resume', '/hobbies', '/contact'] as const
+export const ROUTES = ['/', '/projects', '/resume', '/bio', '/contact'] as const
 
 /**
  * A page that skips the Mac OS 9 startup screen and fails the test on any

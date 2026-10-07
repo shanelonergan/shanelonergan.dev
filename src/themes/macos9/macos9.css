@@ -390,6 +390,9 @@
   background: var(--mac-chrome);
   border-bottom: 1px solid var(--mac-shadow);
 }
+[data-theme='macos9'] .mac-content:focus-visible {
+  outline-offset: -2px;
+}
 [data-theme='macos9'] .mac-content {
   flex: 1;
   min-height: 0;
@@ -609,6 +612,44 @@
 [data-theme='macos9'] .mac-mail-body ul {
   margin: 0;
   padding-left: 18px;
+}
+
+/* Bio as a Get Info window */
+[data-theme='macos9'] .mac-info-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--mac-shadow);
+}
+[data-theme='macos9'] .mac-info-head .mac-doc-title {
+  margin: 0;
+}
+[data-theme='macos9'] .mac-info-list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 10px;
+  margin: 0 0 14px;
+}
+[data-theme='macos9'] .mac-info-list dt {
+  font-family: var(--mac-chicago);
+  text-align: right;
+}
+[data-theme='macos9'] .mac-info-list dd {
+  margin: 0;
+}
+[data-theme='macos9'] .mac-doc h3.mac-info-label {
+  margin: 0 0 4px;
+  font-size: 13px;
+}
+[data-theme='macos9'] .mac-comments {
+  padding: 8px 10px;
+  border: 1px solid var(--mac-shadow);
+  box-shadow: inset 1px 1px 0 #ccc;
+}
+[data-theme='macos9'] .mac-comments p:last-child {
+  margin-bottom: 0;
 }
 
 [data-theme='macos9'] .mac-about-list {
@@ -858,6 +899,15 @@
 @media (max-width: 400px) {
   [data-theme='macos9'] .mac-col-kind {
     display: none;
+  }
+  /* Get Info rows stack on the narrowest phones */
+  [data-theme='macos9'] .mac-info-list {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  [data-theme='macos9'] .mac-info-list dt {
+    margin-top: 6px;
+    text-align: left;
   }
 }
 

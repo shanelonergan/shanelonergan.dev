@@ -40,8 +40,8 @@ test('the footer badge focuses the switcher', async ({ page }) => {
     await expect(page.locator('#theme-select')).toBeFocused()
   }
   await visit(page, '/', 'macos9')
-  // On phones the About Me window covers the desktop's sticky note, so close it first
-  await page.getByRole('button', { name: 'Close About Me' }).click()
+  // On phones the Read Me window covers the desktop's sticky note, so close it first
+  await page.getByRole('button', { name: 'Close Read Me' }).click()
   await page.getByRole('button', { name: 'Best viewed in…' }).click()
   await expect(page.locator('#theme-select')).toBeFocused()
 })

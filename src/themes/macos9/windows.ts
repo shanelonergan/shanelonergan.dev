@@ -13,10 +13,10 @@ export interface WinMeta {
 }
 
 export const winMeta: Record<WinId, WinMeta> = {
-  home: { title: 'About Me', icon: 'document', path: '/', width: 480 },
+  home: { title: 'Read Me', icon: 'document', path: '/', width: 480 },
   projects: { title: 'Projects', icon: 'folder', path: '/projects', width: 580 },
   resume: { title: 'Résumé', icon: 'document', path: '/resume', width: 560 },
-  hobbies: { title: 'Hobbies', icon: 'folder', path: '/hobbies', width: 480 },
+  bio: { title: 'Bio', icon: 'person', path: '/bio', width: 480 },
   contact: { title: 'Mail', icon: 'mail', path: '/contact', width: 460 },
   about: { title: 'About This Shane', icon: 'disk', width: 380 },
   help: { title: 'Keyboard Help', icon: 'document', width: 420 },
@@ -25,10 +25,10 @@ export const winMeta: Record<WinId, WinMeta> = {
 
 /** Desktop icons, top to bottom down the right edge, in Mac fashion. */
 export const desktopIcons: { id: WinId; label: string }[] = [
-  { id: 'home', label: 'About Me' },
+  { id: 'home', label: 'Read Me' },
   { id: 'projects', label: 'Projects' },
   { id: 'resume', label: 'Résumé' },
-  { id: 'hobbies', label: 'Hobbies' },
+  { id: 'bio', label: 'Bio' },
   { id: 'contact', label: 'Mail' },
 ]
 

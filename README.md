@@ -6,7 +6,7 @@ My portfolio, presented three ways. The content is the same in each, but you can
 - **GeoCities (1998):** "Shane's Home Page", in the SiliconValley neighborhood. It has a marquee you can stop, a webring, and a hit counter that only counts your own visits.
 - **Mac OS 9 (1999):** the site is a desktop. Draggable Finder windows roll up when you double-click the title bar, the menus actually work, and the startup screen has an extensions parade.
 
-Links like `?theme=macos9` open the site in a particular era, and every section has its own URL (`/projects`, `/resume`, `/hobbies`, `/contact`).
+Links like `?theme=macos9` open the site in a particular era, and every section has its own URL (`/projects`, `/resume`, `/bio`, `/contact`).
 
 Under the costume, it's a fast, accessible site:
 - **Prerendered:** every page is real HTML before any JavaScript runs.

@@ -7,8 +7,8 @@ import type { LayoutProps } from '../../shared/themeRegistry'
 import { HitCounter } from './HitCounter'
 import { Marquee } from './Marquee'
 import { Webring } from './Webring'
+import { Bio } from './sections/Bio'
 import { Contact } from './sections/Contact'
-import { Hobbies } from './sections/Hobbies'
 import { Home } from './sections/Home'
 import { NotFound } from './sections/NotFound'
 import { Projects } from './sections/Projects'
@@ -19,13 +19,13 @@ const views: Record<SectionId, () => React.JSX.Element> = {
   home: Home,
   projects: Projects,
   resume: Resume,
-  hobbies: Hobbies,
+  bio: Bio,
   contact: Contact,
 }
 
-/** GeoCities addresses were neighborhood/suburb/number. The hobbies page lives on Broadway. */
+/** GeoCities addresses were neighborhood/suburb/number. The bio page lives on Broadway. */
 function neighborhood(section: LayoutProps['section']) {
-  return section?.id === 'hobbies'
+  return section?.id === 'bio'
     ? { name: 'Broadway', address: 'Broadway/Stage/1998' }
     : { name: 'SiliconValley', address: 'SiliconValley/Heights/1999' }
 }
@@ -40,7 +40,7 @@ export default function GeoCitiesLayout({ section }: LayoutProps) {
         <ThemeSwitcher className="gc-switcher" />
       </aside>
 
-      <div className={`gc-panel${section?.id === 'hobbies' ? ' is-broadway' : ''}`}>
+      <div className={`gc-panel${section?.id === 'bio' ? ' is-broadway' : ''}`}>
         <header className="gc-header">
           <div className="gc-construction">
             <span>This page is always under construction!</span>

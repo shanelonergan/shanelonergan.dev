@@ -23,8 +23,19 @@
   status = 301
 
 [[redirects]]
+  from = "/bio/"
+  to = "/bio"
+  status = 301
+
+# Hobbies was folded into the bio
+[[redirects]]
+  from = "/hobbies"
+  to = "/bio"
+  status = 301
+
+[[redirects]]
   from = "/hobbies/"
-  to = "/hobbies"
+  to = "/bio"
   status = 301
 
 [[redirects]]

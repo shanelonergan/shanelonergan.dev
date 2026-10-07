@@ -44,11 +44,11 @@ export const sections: Section[] = [
     description: "Shane Lonergan's experience and skills as a full-stack engineer.",
   },
   {
-    id: 'hobbies',
-    path: '/hobbies',
-    label: 'Hobbies',
-    title: 'Hobbies',
-    description: 'Guitar, musical theatre and other things Shane Lonergan does away from the keyboard.',
+    id: 'bio',
+    path: '/bio',
+    label: 'Bio',
+    title: 'Bio',
+    description: "Shane Lonergan's path from biology and theater to full-stack engineering, and life as a working actor and musician.",
   },
   {
     id: 'contact',

@@ -19,8 +19,8 @@ test.describe('GeoCities', () => {
     )
   })
 
-  test('the hobbies page moves to Broadway', async ({ page }) => {
-    await visit(page, '/hobbies', 'geocities')
+  test('the bio page moves to Broadway', async ({ page }) => {
+    await visit(page, '/bio', 'geocities')
     await expect(page.getByText('Broadway/Stage/1998')).toBeVisible()
   })
 })
@@ -58,7 +58,7 @@ test.describe('Mac OS 9', () => {
     // Into the menu bar, over to File, down into it
     await page.getByRole('menuitem', { name: 'File' }).focus()
     await page.keyboard.press('ArrowDown')
-    await expect(page.getByRole('menuitem', { name: 'Open About Me' })).toBeFocused()
+    await expect(page.getByRole('menuitem', { name: 'Open Read Me' })).toBeFocused()
     await page.keyboard.press('ArrowDown')
     await page.keyboard.press('Enter')
     await expect(page).toHaveURL(/\/projects/)
@@ -107,7 +107,7 @@ test.describe('Mac OS 9', () => {
   test('on a phone, a tap opens an icon and the close box returns to the desktop', async ({ page }, info) => {
     test.skip(info.project.name !== 'phone', 'phone layout')
     await visit(page, '/', 'macos9')
-    await page.getByRole('button', { name: 'Close About Me' }).tap()
+    await page.getByRole('button', { name: 'Close Read Me' }).tap()
     await page.locator('#icon-resume').tap()
     await expect(page.locator('#page-title')).toHaveText('Résumé')
     await expect(page).toHaveURL(/\/resume/)

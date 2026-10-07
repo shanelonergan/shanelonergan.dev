@@ -169,3 +169,30 @@ Still open:
   - The home page's "Recent projects" list is replaced by the link list. Each section has new first-person `blurb` copy in `site.ts`, and the icons are original 24px beveled tiles in `themes/netscape/icons.tsx`.
   - The footer reads "Comments or suggestions are welcome at <b>email</b>", then the name and "Last modified".
   - The switcher label is now "Netscape Navigator (1995)".
+
+## MySpace (2006), added 2026-10-07
+
+- **Shane's picks:** a pimped-out custom layout, projects as the Top 8, a 2006 label, and a profile song using a public-domain musical theatre tune on a chip player.
+- **Branding:** it's called "ShaneSpace | a place for projects". There's no MySpace logo or slogan; "MySpace" appears only in the switcher label.
+  - The site chrome (blue bar and nav) stays stock, as it did on every custom profile. Everything below it is Shane's "custom layout": a stage background with a spotlight, an original note-and-star tile, see-through boxes with dashed hot-pink borders, glitter headings (gradient clipped to text) and blinkies.
+- **Motion:**
+  - Glitter shimmers once (4s), and the blinkies flash 5 times (4s). Both stay under the 5-second WCAG 2.2.2 limit.
+  - The equalizer only moves while the song plays.
+  - Reduced motion turns all of it off.
+- **Routes:**
+  - `/` is the profile: ID card, Contacting Shane (every button is a real link: mailto, LinkedIn, a share mailto, GitHub, the PDF), URL, Interests, Details, extended network, song, Blurbs, Top 8, and an honest "0 of 0 comments (Add Comment)".
+  - `/projects` is "Shane's Friends", `/resume` uses the Companies and Schools tables, `/bio` is "Shane's Blurbs", and `/contact` is "Contacting Shane".
+  - The 404 is "Invalid Friend ID."
+- **Phone order:** below 760px the profile is one column, ordered so the Top 8 comes right after Contacting. `Profile.tsx` renders the boxes in that order with `useMediaQuery`. CSS `order` would have made the visual order disagree with the reading and Tab order.
+- **Song:** `src/themes/myspace/song.ts`, "Give My Regards to Broadway" (George M. Cohan, 1904, *Little Johnny Jones*, public domain).
+  - Melody and chords follow the John Chambers ABC transcription (key of G, 2/4) found via abcnotation.com.
+  - The arrangement is original: a square-wave lead and a triangle oom-pah bass on the chord roots, about 16.6s, synthesized with Web Audio. There are no audio files.
+  - The AudioContext is created only on the click; a test proves none exists on load. Leaving the theme stops the song.
+- **New content:** `bio.interests` and `bio.wantToMeet`. The latter is marked `TODO(shane)`.
+- **Flavor I made up:** "Mood: inspired", "Online Now!", the blinkie texts ("React kid", "Rails 4 life", "theatre nerd"), "(They're projects. Shane is fine.)" and "Layout by Shane".
+- **Profile pic:** an original SVG of a guitar in a spotlight. It's marked `TODO(shane)` in case a real photo should go there.
+- **Fixes after the first screenshots:**
+  - The phone order buried the Top 8.
+  - Seen and shanelonergan.com both showed "S" initials.
+  - The Friends avatars stretched to card height.
+  - axe flagged the Companies and Schools tables as unfocusable scroll areas on phones, so cells now wrap there and the wrappers are focusable regions.

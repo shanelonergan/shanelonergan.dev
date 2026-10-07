@@ -1,0 +1,603 @@
+/*
+ * MySpace, 2006: Shane's own custom profile layout on "ShaneSpace".
+ * Theatre-dark stage, glitter headings, see-through boxes with hot-pink
+ * borders. Every text color is checked for AA on the box behind it.
+ */
+
+[data-theme='myspace'] {
+  --ms-stage: #0b0012;
+  --ms-box: rgb(10 0 20 / 88%);
+  --ms-text: #ffffff;
+  --ms-muted: #e0c8ff;
+  --ms-pink: #ff3399;
+  --ms-pink-deep: #b8005c;
+  --ms-link: #ff8fd2;
+  --ms-visited: #c9a3ff;
+  --ms-lime: #99ff33;
+  --ms-gold: #ffd84d;
+  --ms-blue: #003399;
+  --ms-blue-light: #6699cc;
+  --ms-body: Verdana, Tahoma, Arial, sans-serif;
+  --ms-display: 'Trebuchet MS', 'Arial Black', Verdana, sans-serif;
+
+  color-scheme: dark;
+  /* A stage: spotlight at the top, an original tile of tiny notes and stars */
+  background:
+    radial-gradient(ellipse 70% 45% at 50% 0, rgb(255 216 77 / 22%), transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='%233a1050'%3E%3Cpath d='M20 18v14a4 3 0 1 1-2-2.6V16h8v3z'/%3E%3Cpath d='M86 70v12a4 3 0 1 1-2-2.6V68h7v3z'/%3E%3Cpath d='M70 20l2 5 5 1-4 3 1 5-4-3-4 3 1-5-4-3 5-1z'/%3E%3Cpath d='M22 84l1.5 4 4 .5-3 2.5 1 4-3.5-2.3-3.5 2.3 1-4-3-2.5 4-.5z'/%3E%3C/g%3E%3C/svg%3E"),
+    var(--ms-stage);
+  background-attachment: fixed, scroll, scroll;
+}
+
+[data-theme='myspace'] body {
+  color: var(--ms-text);
+  background: transparent;
+  font: 13px/1.5 var(--ms-body);
+}
+
+[data-theme='myspace'] a {
+  color: var(--ms-link);
+  font-weight: bold;
+}
+[data-theme='myspace'] a:visited {
+  color: var(--ms-visited);
+}
+[data-theme='myspace'] a:hover {
+  color: var(--ms-gold);
+}
+
+[data-theme='myspace'] :focus-visible {
+  outline: 3px solid var(--ms-lime);
+  outline-offset: 2px;
+}
+
+[data-theme='myspace'] h1,
+[data-theme='myspace'] h2,
+[data-theme='myspace'] h3 {
+  font-family: var(--ms-display);
+}
+
+/* ---------- Stock site chrome: the blue bar ---------- */
+
+[data-theme='myspace'] .ms-topbar {
+  background: var(--ms-blue);
+  border-bottom: 3px solid var(--ms-blue-light);
+}
+[data-theme='myspace'] .ms-topbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 8px 16px;
+}
+[data-theme='myspace'] .ms-logo {
+  margin: 0;
+  font: bold 24px/1 var(--ms-display);
+  color: #fff;
+}
+[data-theme='myspace'] .ms-logo a,
+[data-theme='myspace'] .ms-logo a:visited {
+  color: #fff;
+  text-decoration: none;
+}
+[data-theme='myspace'] .ms-logo a span {
+  color: #99ccff;
+}
+[data-theme='myspace'] .ms-logo-tag {
+  font: 12px var(--ms-body);
+  color: #ccddff;
+}
+
+[data-theme='myspace'] .ms-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #fff;
+}
+[data-theme='myspace'] .switcher-select {
+  appearance: none;
+  min-height: 26px;
+  padding: 2px 24px 2px 6px;
+  font: 12px var(--ms-body);
+  color: #000;
+  background:
+    linear-gradient(45deg, transparent 50%, #003399 50%) calc(100% - 12px) 55% / 5px 5px no-repeat,
+    linear-gradient(-45deg, transparent 50%, #003399 50%) calc(100% - 7px) 55% / 5px 5px no-repeat,
+    #fff;
+  border: 1px solid #99bbee;
+  border-radius: 2px;
+}
+
+[data-theme='myspace'] .ms-nav {
+  background: var(--ms-blue-light);
+}
+[data-theme='myspace'] .ms-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4px 12px;
+  list-style: none;
+}
+[data-theme='myspace'] .ms-nav li + li::before {
+  content: '|' / '';
+  color: #003366;
+}
+[data-theme='myspace'] .ms-nav a,
+[data-theme='myspace'] .ms-nav a:visited {
+  display: inline-block;
+  padding: 4px 8px;
+  color: #fff;
+  text-decoration: none;
+  /* white on #6699cc is under 4.5:1, so each link sits on a darker chip */
+  background: rgb(0 30 90 / 55%);
+  border-radius: 2px;
+}
+[data-theme='myspace'] .ms-nav a:hover,
+[data-theme='myspace'] .ms-nav a[aria-current='page'] {
+  background: var(--ms-blue);
+  text-decoration: underline;
+}
+
+/* ---------- Page ---------- */
+
+[data-theme='myspace'] .ms-main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+[data-theme='myspace'] .ms-profile {
+  display: grid;
+  grid-template-columns: 330px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+[data-theme='myspace'] .ms-left,
+[data-theme='myspace'] .ms-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* Glitter text: a sparkly gradient clipped to the letters */
+[data-theme='myspace'] .ms-glitter {
+  color: #ffd1ec;
+  background:
+    radial-gradient(circle at 20% 30%, #fff 0 1px, transparent 2px) 0 0 / 11px 9px,
+    radial-gradient(circle at 70% 60%, #fff 0 1px, transparent 2px) 0 0 / 13px 12px,
+    linear-gradient(100deg, #ffc2e6, #ffffff 30%, #ff9fd8 50%, #fff2b3 70%, #ffc2e6);
+  background-size: 11px 9px, 13px 12px, 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 0 6px rgb(255 51 153 / 55%));
+  /* One shimmer pass (under 5s), then still, so it never needs a pause control */
+  animation: ms-glitter 4s linear 1;
+}
+@keyframes ms-glitter {
+  to {
+    background-position: 22px 18px, -26px 24px, 300% 0;
+  }
+}
+
+[data-theme='myspace'] .ms-page-title {
+  margin: 4px 0 4px;
+  font-size: 34px;
+  line-height: 1.15;
+}
+[data-theme='myspace'] .ms-subtitle {
+  margin: 0 0 16px;
+  color: var(--ms-muted);
+}
+
+/* ---------- Boxes ---------- */
+
+[data-theme='myspace'] .ms-box,
+[data-theme='myspace'] .ms-card {
+  margin: 0 0 16px;
+  background: var(--ms-box);
+  border: 2px dashed var(--ms-pink);
+  box-shadow: 0 0 14px rgb(255 51 153 / 25%);
+}
+/* Inside the profile grid, spacing comes from the gap */
+[data-theme='myspace'] .ms-profile .ms-box,
+[data-theme='myspace'] .ms-profile .ms-card {
+  margin: 0;
+}
+[data-theme='myspace'] .ms-box-head {
+  margin: 0;
+  padding: 4px 10px;
+  font-size: 14px;
+  color: #fff;
+  background: var(--ms-pink-deep);
+}
+[data-theme='myspace'] .ms-head-note {
+  font: 11px var(--ms-body);
+}
+[data-theme='myspace'] .ms-box-body {
+  padding: 10px 12px;
+}
+[data-theme='myspace'] .ms-box-body > :first-child {
+  margin-top: 0;
+}
+[data-theme='myspace'] .ms-box-body > :last-child {
+  margin-bottom: 0;
+}
+[data-theme='myspace'] .ms-box-body h3 {
+  margin: 12px 0 4px;
+  font-size: 14px;
+  color: var(--ms-gold);
+}
+[data-theme='myspace'] .ms-box p {
+  margin: 0 0 8px;
+}
+[data-theme='myspace'] .ms-box ul {
+  margin: 0 0 8px;
+  padding-left: 18px;
+}
+[data-theme='myspace'] .ms-scroll {
+  overflow-x: auto;
+}
+
+[data-theme='myspace'] .ms-small {
+  font-size: 11px;
+  color: var(--ms-muted);
+}
+
+/* Name card */
+[data-theme='myspace'] .ms-card {
+  padding: 12px;
+}
+[data-theme='myspace'] .ms-name {
+  margin: 0 0 10px;
+  font-size: 30px;
+  line-height: 1.1;
+}
+[data-theme='myspace'] .ms-id-row {
+  display: flex;
+  gap: 12px;
+}
+[data-theme='myspace'] .ms-pic {
+  flex: none;
+  width: 140px;
+  height: 140px;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px var(--ms-pink);
+}
+[data-theme='myspace'] .ms-id-info p {
+  margin: 0 0 8px;
+}
+[data-theme='myspace'] .ms-quote {
+  font-style: italic;
+  color: var(--ms-gold);
+}
+[data-theme='myspace'] .ms-online {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: bold;
+  color: var(--ms-lime);
+}
+[data-theme='myspace'] .ms-mood,
+[data-theme='myspace'] .ms-viewmy {
+  margin: 10px 0 0;
+}
+
+/* Contacting box */
+[data-theme='myspace'] .ms-contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+}
+[data-theme='myspace'] .ms-box-body .ms-contact {
+  padding: 8px 0 0;
+}
+[data-theme='myspace'] .ms-contact a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  font-size: 12px;
+  text-decoration: none;
+  background: rgb(255 51 153 / 14%);
+  border: 1px solid rgb(255 143 210 / 45%);
+}
+[data-theme='myspace'] .ms-contact a:hover {
+  background: rgb(255 51 153 / 30%);
+}
+[data-theme='myspace'] .ms-contact-glyph {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 18px;
+  font-size: 11px;
+  color: #000;
+  background: var(--ms-gold);
+}
+
+[data-theme='myspace'] .ms-url {
+  padding: 10px 12px;
+  overflow-wrap: anywhere;
+}
+[data-theme='myspace'] .ms-url p {
+  margin: 0;
+}
+
+/* Interests / Details tables */
+[data-theme='myspace'] .ms-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 3px;
+}
+[data-theme='myspace'] .ms-table th,
+[data-theme='myspace'] .ms-table td {
+  padding: 5px 7px;
+  text-align: left;
+  vertical-align: top;
+}
+[data-theme='myspace'] .ms-table th {
+  width: 36%;
+  color: #000;
+  background: #ffb3df;
+}
+[data-theme='myspace'] .ms-table td {
+  background: rgb(255 255 255 / 8%);
+}
+[data-theme='myspace'] .ms-grid th {
+  width: auto;
+}
+/* Dates stay on one line on wide screens; on phones everything wraps so nothing scrolls */
+@media (min-width: 560px) {
+  [data-theme='myspace'] .ms-grid td:last-child {
+    white-space: nowrap;
+  }
+}
+
+/* Extended network */
+[data-theme='myspace'] .ms-extended {
+  margin: 0;
+  padding: 14px;
+  font-size: 18px;
+  text-align: center;
+  background: var(--ms-box);
+  border: 2px dashed var(--ms-lime);
+}
+
+/* Profile song */
+[data-theme='myspace'] .ms-player-body {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+}
+[data-theme='myspace'] .ms-play {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  color: #000;
+  background: linear-gradient(#fff, #ccc);
+  border: 2px solid var(--ms-pink);
+  border-radius: 50%;
+  cursor: pointer;
+}
+[data-theme='myspace'] .ms-play[aria-pressed='true'] {
+  background: linear-gradient(var(--ms-gold), #ff9900);
+}
+[data-theme='myspace'] .ms-track {
+  flex: 1;
+  min-width: 0;
+}
+[data-theme='myspace'] .ms-track p {
+  margin: 0;
+}
+[data-theme='myspace'] .ms-track-title {
+  font-weight: bold;
+  color: var(--ms-gold);
+}
+[data-theme='myspace'] .ms-track-meta {
+  font-size: 11px;
+  color: var(--ms-muted);
+}
+[data-theme='myspace'] .ms-eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 22px;
+}
+[data-theme='myspace'] .ms-eq span {
+  width: 4px;
+  height: 4px;
+  background: var(--ms-lime);
+}
+[data-theme='myspace'] .ms-eq.is-playing span {
+  animation: ms-eq 0.5s ease-in-out infinite alternate;
+}
+[data-theme='myspace'] .ms-eq.is-playing span:nth-child(2) {
+  animation-delay: -0.2s;
+}
+[data-theme='myspace'] .ms-eq.is-playing span:nth-child(3) {
+  animation-delay: -0.35s;
+}
+[data-theme='myspace'] .ms-eq.is-playing span:nth-child(4) {
+  animation-delay: -0.1s;
+}
+@keyframes ms-eq {
+  to {
+    height: 22px;
+  }
+}
+
+/* Top 8 */
+[data-theme='myspace'] .ms-count {
+  color: var(--ms-lime);
+}
+[data-theme='myspace'] .ms-top8 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 10px 0;
+  padding: 0 !important;
+  list-style: none;
+}
+[data-theme='myspace'] .ms-top8 a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  text-align: center;
+  text-decoration: none;
+}
+[data-theme='myspace'] .ms-top8-name {
+  text-decoration: underline;
+  overflow-wrap: anywhere;
+}
+[data-theme='myspace'] .ms-avatar {
+  width: 100%;
+  max-width: 90px;
+  aspect-ratio: 1;
+  border: 2px solid #fff;
+}
+[data-theme='myspace'] .ms-right-link {
+  text-align: right;
+}
+
+/* Friends page */
+[data-theme='myspace'] .ms-friends {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+[data-theme='myspace'] .ms-friend {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 12px;
+}
+[data-theme='myspace'] .ms-friend .ms-avatar {
+  flex: none;
+  align-self: flex-start;
+  width: 72px;
+  height: 72px;
+}
+[data-theme='myspace'] .ms-friend-body {
+  min-width: 0;
+}
+[data-theme='myspace'] .ms-friend-name {
+  margin: 0 0 4px;
+  font-size: 16px;
+  color: var(--ms-gold);
+}
+[data-theme='myspace'] .ms-friend-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+
+[data-theme='myspace'] .ms-big-link {
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+[data-theme='myspace'] .ms-error {
+  max-width: 560px;
+}
+[data-theme='myspace'] .ms-error .ms-box-head {
+  font-size: 18px;
+}
+
+/* ---------- Footer ---------- */
+
+[data-theme='myspace'] .ms-footer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 8px 16px 32px;
+  text-align: center;
+}
+[data-theme='myspace'] .ms-blinkies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+/* A blinkie: 150×20, text flashing between two colors. Four flashes, then still (WCAG 2.2.2). */
+[data-theme='myspace'] .ms-blinkie {
+  display: inline-grid;
+  place-items: center;
+  width: 150px;
+  height: 20px;
+  font: bold 11px var(--ms-body);
+  color: #000;
+  background: #ff99cc;
+  border: 1px solid #fff;
+  animation: ms-blinkie 0.8s steps(1) 5;
+}
+[data-theme='myspace'] .ms-blinkie.is-b {
+  background: #99ccff;
+}
+[data-theme='myspace'] .ms-blinkie.is-c {
+  background: #ccff99;
+}
+@keyframes ms-blinkie {
+  50% {
+    color: #fff;
+    background: #000;
+  }
+}
+[data-theme='myspace'] .ms-badge {
+  padding: 2px 8px;
+  font: bold 12px var(--ms-body);
+  color: #000;
+  background: var(--ms-gold);
+  border: 2px outset #fff;
+  cursor: pointer;
+}
+
+/* ---------- Narrow screens ---------- */
+
+@media (max-width: 759px) {
+  /* One column; Profile.tsx renders the boxes in phone order */
+  [data-theme='myspace'] .ms-profile {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  [data-theme='myspace'] .ms-main {
+    padding: 12px;
+  }
+  [data-theme='myspace'] .ms-logo-tag {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  [data-theme='myspace'] .ms-id-row {
+    flex-direction: column;
+  }
+  [data-theme='myspace'] .ms-top8 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  [data-theme='myspace'] .ms-contact {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme='myspace'] .ms-glitter,
+  [data-theme='myspace'] .ms-blinkie,
+  [data-theme='myspace'] .ms-eq.is-playing span {
+    animation: none;
+  }
+}

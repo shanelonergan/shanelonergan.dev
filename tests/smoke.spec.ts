@@ -3,9 +3,9 @@ import { ROUTES, THEMES, expect, test, visit } from './helpers'
 
 const headings: Record<string, string> = {
   '/': 'Shane',
-  '/projects': 'Projects',
+  '/projects': 'Projects|Friends',
   '/resume': 'Résumé',
-  '/bio': 'Bio|About Me',
+  '/bio': 'Bio|About Me|Blurbs',
   '/contact': 'Contact|E-mail|Mail',
 }
 

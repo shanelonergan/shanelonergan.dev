@@ -15,4 +15,11 @@ export const bio: Bio = {
     { label: 'Plays', value: 'Guitar, self-taught for 10+ years' },
     { label: 'Performs', value: 'Musical theatre' },
   ],
+  interests: [
+    { label: 'General', value: 'Building things, from skateboards and pens to websites' },
+    { label: 'Music', value: 'Guitar: self-taught for 10+ years, now learning theory and improvisation' },
+    { label: 'Theater', value: 'Musical theatre, onstage and off' },
+  ],
+  // TODO(shane): is this who you'd like to meet?
+  wantToMeet: 'Teams who care about the person on the other side of the screen, and anyone who wants to talk shop about React, Rails or a good cast album.',
 }

@@ -127,3 +127,46 @@ test.describe('Mac OS 9', () => {
     expect(Math.round(after.y - before.y)).toBe(100)
   })
 })
+
+test.describe('MySpace', () => {
+  test('the profile song only plays when asked, and stops', async ({ page }) => {
+    await page.addInitScript(() => {
+      // Count AudioContexts so we can prove nothing starts on load
+      const Real = window.AudioContext
+      ;(window as unknown as { __audio: number }).__audio = 0
+      window.AudioContext = class extends Real {
+        constructor() {
+          super()
+          ;(window as unknown as { __audio: number }).__audio++
+        }
+      }
+    })
+    await visit(page, '/', 'myspace')
+    await page.waitForTimeout(500)
+    expect(await page.evaluate(() => (window as unknown as { __audio: number }).__audio)).toBe(0)
+    const play = page.getByRole('button', { name: /Play the profile song/ })
+    await play.click()
+    await expect(page.getByRole('button', { name: /Stop the profile song/ })).toHaveAttribute('aria-pressed', 'true')
+    expect(await page.evaluate(() => (window as unknown as { __audio: number }).__audio)).toBe(1)
+    await page.getByRole('button', { name: /Stop the profile song/ }).click()
+    await expect(page.getByRole('button', { name: /Play the profile song/ })).toHaveAttribute('aria-pressed', 'false')
+  })
+
+  test('the Top 8 lists projects and links to all of them', async ({ page }) => {
+    await visit(page, '/', 'myspace')
+    await expect(page.locator('.ms-top8 li')).toHaveCount(6)
+    await page.getByRole('link', { name: "View All of Shane's Friends" }).click()
+    await expect(page).toHaveURL(/\/projects/)
+    await expect(page.locator('#page-title')).toHaveText("Shane's Friends")
+  })
+
+  test('on a phone, the Top 8 comes before the interests', async ({ page }, info) => {
+    test.skip(info.project.name !== 'phone', 'phone layout')
+    await visit(page, '/', 'myspace')
+    const order = await page.locator('.ms-profile > *').evaluateAll((els) => els.map((e) => e.textContent?.slice(0, 30)))
+    const top8 = order.findIndex((t) => t?.includes('Friend Space'))
+    const interests = order.findIndex((t) => t?.includes('Interests'))
+    expect(top8).toBeGreaterThan(-1)
+    expect(top8).toBeLessThan(interests)
+  })
+})

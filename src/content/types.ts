@@ -66,6 +66,10 @@ export interface Bio {
   paragraphs: string[]
   /** Short label/value pairs: a GeoCities fact list, a Mac Get Info window */
   facts: Fact[]
+  /** MySpace-style "Interests" rows */
+  interests: Fact[]
+  /** MySpace's "Who I'd like to meet" blurb */
+  wantToMeet: string
 }
 
 export interface HotlistLink {

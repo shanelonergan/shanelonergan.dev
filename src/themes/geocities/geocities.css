@@ -1,0 +1,471 @@
+/*
+ * GeoCities, 1998: "Shane's Home Page" in the SiliconValley neighborhood.
+ * Joyful on the outside; every line of text sits on solid black for contrast.
+ */
+
+[data-theme='geocities'] {
+  --gc-navy: #000033;
+  --gc-panel: #000;
+  --gc-text: #fff;
+  --gc-heading: #ffff00;
+  --gc-link: #00ffff;
+  --gc-visited: #ff00ff;
+  --gc-stripe: #ffcc00;
+  --gc-silver: #c0c0c0;
+  --gc-body: Verdana, Geneva, Tahoma, Arial, sans-serif;
+  --gc-display: 'Comic Neue', 'Comic Sans MS', 'Chalkboard SE', cursive;
+
+  color-scheme: dark;
+  /* An original starfield tile: a few stars of different sizes and brightness */
+  background: var(--gc-navy)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' shape-rendering='crispEdges'%3E%3Cg fill='%23fff'%3E%3Crect x='12' y='18' width='2' height='2'/%3E%3Crect x='71' y='9' width='1' height='1'/%3E%3Crect x='133' y='27' width='2' height='2'/%3E%3Crect x='40' y='62' width='1' height='1'/%3E%3Crect x='104' y='70' width='1' height='1'/%3E%3Crect x='150' y='96' width='1' height='1'/%3E%3Crect x='22' y='118' width='1' height='1'/%3E%3Crect x='86' y='140' width='2' height='2'/%3E%3C/g%3E%3Cg fill='%238888ff'%3E%3Crect x='57' y='36' width='1' height='1'/%3E%3Crect x='118' y='122' width='1' height='1'/%3E%3Crect x='5' y='88' width='1' height='1'/%3E%3C/g%3E%3Cpath fill='%23ffff99' d='M93 98h1v-2h1v2h2v1h-2v2h-1v-2h-2z'/%3E%3C/svg%3E")
+    repeat;
+}
+
+[data-theme='geocities'] body {
+  background: transparent;
+  color: var(--gc-text);
+  font: 14px/1.5 var(--gc-body);
+}
+
+[data-theme='geocities'] a {
+  color: var(--gc-link);
+}
+[data-theme='geocities'] a:visited {
+  color: var(--gc-visited);
+}
+[data-theme='geocities'] a:hover {
+  color: var(--gc-heading);
+}
+
+[data-theme='geocities'] :focus-visible {
+  outline: 3px solid var(--gc-heading);
+  outline-offset: 2px;
+}
+
+[data-theme='geocities'] h1,
+[data-theme='geocities'] h2,
+[data-theme='geocities'] h3 {
+  font-family: var(--gc-display);
+  font-weight: 700;
+  color: var(--gc-heading);
+  line-height: 1.2;
+}
+
+[data-theme='geocities'] h1 {
+  margin: 0.5em 0 0.4em;
+  font-size: 32px;
+  text-align: center;
+}
+[data-theme='geocities'] h2 {
+  margin: 1.2em 0 0.4em;
+  font-size: 24px;
+}
+[data-theme='geocities'] h3 {
+  margin: 0 0 0.2em;
+  font-size: 19px;
+}
+
+[data-theme='geocities'] hr {
+  margin: 24px 0 16px;
+  border: 0;
+  border-top: 2px groove #808080;
+}
+
+[data-theme='geocities'] code {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Page frame */
+[data-theme='geocities'] .gc-page {
+  padding: 12px 16px 32px;
+}
+
+[data-theme='geocities'] .gc-topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+[data-theme='geocities'] .gc-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: var(--gc-panel);
+  border: 2px solid var(--gc-link);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+[data-theme='geocities'] .switcher-select {
+  appearance: none;
+  min-height: 28px;
+  padding: 2px 26px 2px 6px;
+  font: bold 13px var(--gc-body);
+  color: var(--gc-text);
+  background:
+    linear-gradient(45deg, transparent 50%, var(--gc-link) 50%) calc(100% - 13px) 55% / 6px 6px no-repeat,
+    linear-gradient(-45deg, transparent 50%, var(--gc-link) 50%) calc(100% - 7px) 55% / 6px 6px no-repeat,
+    #000;
+  border: 1px solid var(--gc-silver);
+  border-radius: 0;
+}
+
+[data-theme='geocities'] .gc-panel {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px 24px;
+  background: var(--gc-panel);
+  border: 4px ridge var(--gc-silver);
+}
+
+/* Under construction: a hazard stripe drawn in CSS */
+[data-theme='geocities'] .gc-construction {
+  display: flex;
+  justify-content: center;
+  margin: 0 -24px;
+  padding: 6px 0;
+  background: repeating-linear-gradient(-45deg, var(--gc-stripe) 0 12px, #000 12px 24px);
+}
+[data-theme='geocities'] .gc-construction span {
+  padding: 2px 10px;
+  font: bold 12px/1.4 var(--gc-body);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #000;
+  background: var(--gc-stripe);
+  border: 2px solid #000;
+}
+
+[data-theme='geocities'] .gc-header {
+  text-align: center;
+}
+[data-theme='geocities'] .gc-welcome {
+  margin: 16px 0 0;
+  font: bold 18px var(--gc-display);
+  color: var(--gc-link);
+}
+[data-theme='geocities'] .gc-sitename {
+  margin: 0 0 8px;
+  font: bold 40px/1.1 var(--gc-display);
+  color: var(--gc-heading);
+  text-shadow: 3px 3px 0 #cc0000;
+}
+
+/* Marquee */
+[data-theme='geocities'] .gc-marquee {
+  display: flex;
+  align-items: stretch;
+  margin: 8px 0 16px;
+  border: 2px inset #808080;
+  background: #000066;
+}
+[data-theme='geocities'] .gc-marquee-track {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+[data-theme='geocities'] .gc-marquee-text {
+  display: inline-block;
+  padding: 4px 0 4px 100%;
+  font-weight: bold;
+  color: #fff;
+  animation: gc-marquee 28s linear infinite;
+}
+[data-theme='geocities'] .gc-marquee.is-paused .gc-marquee-text,
+[data-theme='geocities'] .gc-marquee:hover .gc-marquee-text {
+  animation-play-state: paused;
+}
+[data-theme='geocities'] .gc-marquee-toggle {
+  flex: none;
+  padding: 0 10px;
+  font: bold 12px var(--gc-body);
+  color: #000;
+  background: var(--gc-silver);
+  border: 2px outset #fff;
+  cursor: pointer;
+}
+[data-theme='geocities'] .gc-marquee-toggle:active {
+  border-style: inset;
+}
+
+@keyframes gc-marquee {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Nav: chunky beveled buttons */
+[data-theme='geocities'] .gc-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+[data-theme='geocities'] .gc-nav a {
+  display: inline-block;
+  min-width: 96px;
+  padding: 6px 12px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+  background: var(--gc-silver);
+  border: 3px outset #fff;
+}
+[data-theme='geocities'] .gc-nav a:hover {
+  background: #e0e0e0;
+}
+[data-theme='geocities'] .gc-nav a[aria-current='page'] {
+  color: #000;
+  background: var(--gc-heading);
+  border-style: inset;
+}
+
+[data-theme='geocities'] .gc-main {
+  margin-top: 8px;
+}
+
+[data-theme='geocities'] .gc-center {
+  text-align: center;
+}
+[data-theme='geocities'] .gc-lead {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--gc-link);
+}
+[data-theme='geocities'] .gc-big {
+  font-size: 20px;
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+/* Star bullets */
+[data-theme='geocities'] .gc-stars {
+  padding-left: 0;
+  list-style: none;
+}
+[data-theme='geocities'] .gc-stars li {
+  position: relative;
+  margin: 4px 0;
+  padding-left: 22px;
+}
+[data-theme='geocities'] .gc-stars li::before {
+  content: '★' / '';
+  position: absolute;
+  left: 0;
+  color: var(--gc-heading);
+}
+[data-theme='geocities'] .gc-skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0 12px;
+}
+
+/* The one blinking thing */
+[data-theme='geocities'] .gc-new {
+  display: inline-block;
+  margin-right: 4px;
+  padding: 0 4px;
+  font-weight: bold;
+  color: #000;
+  background: #ff3333;
+  /* Five blinks and done: moving content past 5s would need a stop control */
+  animation: gc-blink 1s steps(1) 4;
+}
+@keyframes gc-blink {
+  50% {
+    visibility: hidden;
+  }
+}
+
+/* Boxes, like a <table border=3> */
+[data-theme='geocities'] .gc-box {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border: 3px ridge var(--gc-silver);
+}
+[data-theme='geocities'] .gc-box > :first-child {
+  margin-top: 0;
+}
+/* The Broadway neighborhood: boxes get a border of marquee bulbs */
+[data-theme='geocities'] .gc-panel.is-broadway .gc-box {
+  border: 4px dotted var(--gc-stripe);
+}
+[data-theme='geocities'] .gc-box > :last-child {
+  margin-bottom: 0;
+}
+[data-theme='geocities'] .gc-box ul {
+  padding-left: 1.2em;
+}
+
+[data-theme='geocities'] .gc-projects {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+[data-theme='geocities'] .gc-project-name {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+[data-theme='geocities'] .gc-year {
+  font: 14px var(--gc-body);
+  color: var(--gc-text);
+}
+[data-theme='geocities'] .gc-projects p {
+  margin: 4px 0;
+}
+[data-theme='geocities'] .gc-stack {
+  font-size: 13px;
+  color: #ccc;
+}
+[data-theme='geocities'] .gc-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-weight: bold;
+}
+
+[data-theme='geocities'] .gc-dates {
+  margin: 0 0 8px;
+  font-style: italic;
+  color: #ccc;
+}
+
+[data-theme='geocities'] .gc-download {
+  display: inline-block;
+  padding: 8px 16px;
+  font-weight: bold;
+  border: 3px ridge var(--gc-link);
+}
+
+[data-theme='geocities'] .gc-coming-soon {
+  font-style: italic;
+}
+
+/* Visitor counter: odometer digits */
+[data-theme='geocities'] .gc-counter {
+  margin: 0;
+  text-align: center;
+}
+[data-theme='geocities'] .gc-odometer {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0 4px;
+  font-weight: bold;
+}
+[data-theme='geocities'] .gc-digit {
+  display: inline-block;
+  width: 1.3em;
+  padding: 2px 0;
+  font: bold 16px 'Courier New', Courier, monospace;
+  text-align: center;
+  color: #33ff33;
+  background: #111;
+  border: 2px inset #666;
+}
+
+/* Footer and webring */
+[data-theme='geocities'] .gc-footer {
+  margin-top: 16px;
+  text-align: center;
+}
+[data-theme='geocities'] .gc-webring {
+  padding: 10px 12px;
+  border: 3px double var(--gc-heading);
+}
+[data-theme='geocities'] .gc-webring-title {
+  margin: 0 0 6px;
+}
+[data-theme='geocities'] .gc-webring ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-weight: bold;
+}
+[data-theme='geocities'] .gc-webring li + li::before {
+  content: '|' / '';
+  padding: 0 10px;
+  color: var(--gc-silver);
+}
+[data-theme='geocities'] .gc-hood {
+  margin: 12px 0;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+[data-theme='geocities'] .gc-badge {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 104px;
+  height: 36px;
+  padding: 0 6px;
+  font: bold 11px/1.15 Arial, Helvetica, sans-serif;
+  text-align: left;
+  color: #fff;
+  background: #000;
+  border: 2px solid var(--gc-link);
+  cursor: pointer;
+}
+[data-theme='geocities'] .gc-badge-big {
+  font-size: 14px;
+  color: var(--gc-heading);
+}
+
+@media (max-width: 719px) {
+  [data-theme='geocities'] body {
+    font-size: 16px;
+  }
+  [data-theme='geocities'] .gc-page {
+    padding: 8px 8px 24px;
+  }
+  [data-theme='geocities'] .gc-topbar {
+    justify-content: center;
+  }
+  [data-theme='geocities'] .gc-panel {
+    padding: 0 14px 16px;
+  }
+  [data-theme='geocities'] .gc-construction {
+    margin: 0 -14px;
+  }
+  [data-theme='geocities'] .gc-sitename {
+    font-size: 32px;
+  }
+  [data-theme='geocities'] h1 {
+    font-size: 28px;
+  }
+  [data-theme='geocities'] .gc-nav a {
+    min-width: 0;
+    padding: 8px 10px;
+  }
+  [data-theme='geocities'] .gc-box {
+    padding: 10px 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme='geocities'] .gc-marquee-track {
+    white-space: normal;
+  }
+  [data-theme='geocities'] .gc-marquee-text {
+    padding-left: 8px;
+    animation: none;
+  }
+  [data-theme='geocities'] .gc-marquee-toggle {
+    display: none;
+  }
+  [data-theme='geocities'] .gc-new {
+    animation: none;
+  }
+}

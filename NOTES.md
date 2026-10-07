@@ -6,7 +6,7 @@ A running log of design decisions and what was tried, so a later session can pic
 
 - [x] Phase 1: plan approved (2026-10-06)
 - [x] Phase 2: foundation and the Netscape theme
-- [ ] Phase 3: GeoCities
+- [x] Phase 3: GeoCities
 - [ ] Phase 4: Mac OS 9
 - [ ] Phase 5: polish (Playwright smoke and axe tests, Lighthouse, og.png, README)
 
@@ -43,6 +43,19 @@ A running log of design decisions and what was tried, so a later session can pic
   - The site name appeared above the nav *and* as the h1 on home, so I removed the header name.
   - The header was capped at 64em, which left the switcher short of the top-right corner, so the header is now full width and only the columns are capped.
   - The finger box wrapped mid-field at 390px, so the fields stack.
+
+## GeoCities (1998)
+
+- **Layout:** a centered black panel, max 760px, on an original SVG starfield tile (an inline data URI). All text sits on solid black, so contrast never depends on the stars.
+- **Neighborhoods** were real GeoCities addressing:
+  - The site lives at `SiliconValley/Heights/1999`.
+  - The hobbies page moves to `Broadway/Stage/1998`, and its boxes swap their ridge border for a dotted yellow "marquee bulb" border.
+- **Marquee:** CSS `translateX` on a single copy of the text. Motion that lasts more than 5s needs a way to stop it (WCAG 2.2.2), so there's a Stop/Scroll toggle, and hovering pauses it. Under reduced motion it's static and wraps.
+- **Blink:** only the "NEW!" tag, and only for 4 cycles (under 5s), for the same reason.
+- **Hit counter:** a localStorage count that goes up once per *browser session* (a sessionStorage flag), not per page view. A new tab counts as a new visit. If storage is blocked it shows `#?????` and "(your browser keeps secrets)".
+- **Webring:** the "Brooklyn Coders Ring", which rings around the site's own sections. The component is keyed by section, so "Random" re-rolls on every page and is never the current one.
+- **Fonts:** Comic Neue 700, latin subset only, via `@fontsource/comic-neue` (OFL, bundled with the lazy chunk). Body text is Verdana.
+- **After the first screenshots:** the h2 at the top of each box had a big gap, so the first child's margin is now 0. I also added the Broadway border so the hobbies page feels like a different neighborhood.
 
 ## Content TODOs for Shane
 

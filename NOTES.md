@@ -196,3 +196,19 @@ Still open:
   - Seen and shanelonergan.com both showed "S" initials.
   - The Friends avatars stretched to card height.
   - axe flagged the Companies and Schools tables as unfocusable scroll areas on phones, so cells now wrap there and the wrappers are focusable regions.
+
+## Today (2026), added 2026-10-09
+
+- **Shane's picks:** label it "Today (2026)" and keep Netscape as the default. The id is `today`, so the shareable link is `?theme=today`.
+- **Design plan,** reviewed against generic portfolio defaults:
+  - **Color:** fog gray `#e9ecf0`, ink `#161a20`, slate `#3c4450` and line `#c3c8d0`, plus five keycap pastels taken from the keyboard in Shane's portrait: petal `#f6b8cb`, butter `#f6e08c`, mint `#a9e0b4`, aqua `#93d5e2`, lilac `#c9b6f0`. Dark mode follows `prefers-color-scheme`.
+  - **Avoided:** the rust blazer plus cream sweater would have pushed toward the cream-and-terracotta cliché, so the color comes from the keycaps instead.
+  - **Type:** one family, Atkinson Hyperlegible Next Variable (OFL, `@fontsource-variable`, latin subset only). It's the Braille Institute's legibility face, which fits a site that's strict about accessibility. The name is set at 800 weight, tight, up to 6.75rem; body is 18px with 1.6 line-height.
+  - **The one loud element:** the nav is a row of pastel keycaps with legends H/P/R/B/C. Each has a solid darker "skirt" made with `color-mix`, and it presses down (4px) on `:active` and stays pressed for the current page. That's the only motion, and it's user-triggered; reduced motion removes the transition.
+  - **Everything else is quiet:** project, résumé and education entries are rows with the year or dates in a margin column (a real sequence), not a card grid. There are no all-caps labels, no middot meta strings, and no → arrows.
+- **Photo:** a separate 4:5 crop at 640×800 WebP (34KB), re-encoded through canvas so there's no metadata, in `src/themes/today/shane.webp`.
+- **Fixes after the first screenshots:**
+  - The wordmark duplicated the huge name on home, so it's hidden on home only.
+  - The photo floated vertically centered next to the text, so it's now top-aligned.
+  - The switcher arrow rendered badly with rem sizing, so it uses whole pixels.
+  - The bio's whole first paragraph was set as an intro and was too heavy, so it's back to body text.

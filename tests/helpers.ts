@@ -1,6 +1,6 @@
 import { test as base, expect, type Page } from '@playwright/test'
 
-export const THEMES = ['netscape', 'geocities', 'macos9', 'myspace'] as const
+export const THEMES = ['netscape', 'geocities', 'macos9', 'myspace', 'today'] as const
 export const ROUTES = ['/', '/projects', '/resume', '/bio', '/contact'] as const
 
 /**

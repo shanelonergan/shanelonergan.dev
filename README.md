@@ -6,7 +6,7 @@ My portfolio, presented five ways. The content is the same in each, but you can 
 - **GeoCities (1998):** "Shane's Home Page", in the SiliconValley neighborhood. It has a marquee you can stop, a webring, and a hit counter that only counts your own visits.
 - **Mac OS 9 (1999):** the site is a desktop. Draggable Finder windows roll up when you double-click the title bar, the menus actually work, and the startup screen has an extensions parade.
 - **MySpace (2006):** Shane's own pimped-out profile on "ShaneSpace", with a Top 8 of projects, glitter, blinkies, and a profile song: an original 8-bit arrangement of George M. Cohan's public-domain "Give My Regards to Broadway" that plays only when you press Play.
-- **Today (2026):** the site as a stage. A follow-spot tracks your pointer across the hero, sections fade up like lighting cues as you scroll, page changes crossfade like scene changes, and light and dark mode are the house lights going up and down. Set in Bodoni Moda and Atkinson Hyperlegible Next.
+- **Today (2026):** the site as a stage. A follow-spot tracks your pointer across the hero, sections fade up like lighting cues as you scroll, page changes crossfade like scene changes, and light and dark mode are the house lights going up and down. Set in Qanelas Soft and Atkinson Hyperlegible Next.
 
 Links like `?theme=macos9` open the site in a particular era, and every section has its own URL (`/projects`, `/resume`, `/bio`, `/contact`).
 
@@ -52,6 +52,8 @@ grep -rn "TODO(shane)" src/
 ```
 
 The résumé PDF is in [`public/shane-lonergan-resume.pdf`](public/shane-lonergan-resume.pdf).
+
+The Today era's display face, Qanelas Soft, is a licensed font that isn't in this repo (its EULA allows use on the site but not redistribution). Put `qanelas-soft-extrabold.woff2` and `qanelas-soft-ultralight.woff2` in `public/fonts/qanelas/` to get it; without them the era falls back to a system geometric sans.
 
 ## How it's put together
 

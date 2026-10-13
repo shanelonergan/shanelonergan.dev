@@ -3,14 +3,40 @@
  *
  * The site is a stage. The hero is a dark stage under a slowly drifting
  * spot; sections fade up like lighting cues as they scroll into view; light and dark mode are the house lights going up and down.
- * Type is Bodoni Moda (a theater-poster didone) for the big words and
- * Atkinson Hyperlegible Next for everything you read.
+ * Type is Qanelas Soft (Shane's pick: a round geometric sans, ExtraBold for
+ * the big words and UltraLight for the quote) and Atkinson Hyperlegible Next
+ * for everything you read.
  *
  * Techniques follow good-css.com: OKLCH tokens with light-dark(), a fluid
  * Utopia scale, a content grid with breakouts, @property-eased custom
  * properties, scroll-driven cues, an anchored sliding nav indicator, and
  * motion that is opt-in behind prefers-reduced-motion.
  */
+
+/*
+ * Qanelas Soft, by Radomir Tinkov. The free EULA (public/fonts/qanelas/EULA.pdf)
+ * allows commercial use and web font use via @font-face, but not redistribution,
+ * so the files live in public/fonts/qanelas/, which is not committed. Without
+ * them the stack falls back to a system geometric sans. The demo draws a
+ * placeholder box for characters it doesn't include, so unicode-range limits
+ * it to the real glyphs and everything else falls back to Atkinson.
+ */
+@font-face {
+  font-family: 'Qanelas Soft';
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/qanelas/qanelas-soft-extrabold.woff2') format('woff2');
+  unicode-range: U+0021, U+0024, U+0027, U+002C, U+002E, U+0030-003B, U+003F, U+0041-005A, U+0061-007A;
+}
+@font-face {
+  font-family: 'Qanelas Soft';
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+  src: url('/fonts/qanelas/qanelas-soft-ultralight.woff2') format('woff2');
+  unicode-range: U+0021, U+0024, U+0027, U+002C, U+002E, U+0030-003B, U+003F, U+0041-005A, U+0061-007A;
+}
 
 /* Registered so it can be animated by scroll */
 @property --st-lit {
@@ -68,7 +94,7 @@
   );
 
   --st-sans: 'Atkinson Hyperlegible Next Variable', 'Atkinson Hyperlegible Next', system-ui, sans-serif;
-  --st-display: 'Bodoni Moda Variable', 'Bodoni Moda', 'Bodoni 72', Didot, 'Times New Roman', serif;
+  --st-display: 'Qanelas Soft', 'Avenir Next', 'Avenir', 'Segoe UI Variable Display', 'Segoe UI', system-ui, sans-serif;
 
   --st-content: 70rem;
   --st-gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
@@ -177,8 +203,8 @@
 }
 [data-theme='today'] .st-wordmark {
   margin: 0;
-  font: 500 var(--step-1) / 1 var(--st-display);
-  letter-spacing: 0.01em;
+  font: 800 var(--step-0) / 1 var(--st-display);
+  letter-spacing: -0.01em;
 }
 [data-theme='today'] .st-wordmark a {
   text-decoration: none;
@@ -326,9 +352,8 @@
 }
 [data-theme='today'] .st-name {
   margin: 0 0 var(--space-s);
-  font: 500 clamp(3.5rem, 2rem + 7.5vw, 8.25rem) / 0.9 var(--st-display);
-  font-optical-sizing: auto;
-  letter-spacing: -0.02em;
+  font: 800 clamp(3.25rem, 1.75rem + 7.5vw, 8rem) / 0.92 var(--st-display);
+  letter-spacing: -0.035em;
   text-wrap: balance;
 }
 [data-theme='today'] .st-portrait {
@@ -355,9 +380,8 @@
 }
 [data-theme='today'] .st-title {
   margin: var(--space-m) 0 var(--space-xs);
-  font: 500 var(--step-5) / 1 var(--st-display);
-  font-optical-sizing: auto;
-  letter-spacing: -0.015em;
+  font: 800 var(--step-5) / 1 var(--st-display);
+  letter-spacing: -0.03em;
 }
 [data-theme='today'] .st-title-row {
   display: flex;
@@ -381,8 +405,8 @@
 }
 [data-theme='today'] .st-section > h2 {
   margin: 0 0 var(--space-s);
-  font: 500 var(--step-3) / 1.1 var(--st-display);
-  font-optical-sizing: auto;
+  font: 800 var(--step-3) / 1.1 var(--st-display);
+  letter-spacing: -0.02em;
 }
 
 /* A quote set in the poster face */
@@ -390,15 +414,14 @@
   margin: 0 0 var(--space-s);
 }
 [data-theme='today'] .st-quote p {
-  max-inline-size: 18ch;
-  font: 500 var(--step-4) / 1.08 var(--st-display);
-  font-optical-sizing: auto;
+  max-inline-size: 20ch;
+  font: 200 var(--step-4) / 1.12 var(--st-display);
   letter-spacing: -0.01em;
 }
 
 [data-theme='today'] .st-email {
-  font: 500 var(--step-3) / 1.1 var(--st-display);
-  font-optical-sizing: auto;
+  font: 800 var(--step-3) / 1.1 var(--st-display);
+  letter-spacing: -0.02em;
   overflow-wrap: anywhere;
   text-decoration-thickness: 2px;
 }
@@ -653,9 +676,8 @@
 }
 [data-theme='today'] .st-stage-name {
   margin-block: 0.4em 0.3em !important;
-  font: 500 var(--step-4) / 1.02 var(--st-display);
-  font-optical-sizing: auto;
-  letter-spacing: -0.01em;
+  font: 800 var(--step-4) / 1.02 var(--st-display);
+  letter-spacing: -0.03em;
   overflow-wrap: anywhere;
 }
 [data-theme='today'] .st-stage-year {

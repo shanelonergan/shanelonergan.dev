@@ -1,5 +1,4 @@
 import '@fontsource-variable/atkinson-hyperlegible-next'
-import '@fontsource-variable/bodoni-moda/opsz.css'
 import { Link, NavLink } from 'react-router'
 import { sections, site } from '../../content/site'
 import type { SectionId } from '../../content/types'

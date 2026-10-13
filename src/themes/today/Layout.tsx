@@ -21,7 +21,7 @@ const views: Record<SectionId, () => React.JSX.Element> = {
   contact: Contact,
 }
 
-/** Today, 2026: the site as a stage. House lights, a follow-spot, lighting cues. */
+/** Today, 2026: the site as a stage. House lights, lighting cues, scene changes. */
 export default function TodayLayout({ section }: LayoutProps) {
   const View = section ? views[section.id] : NotFound
   const [house, toggleHouse] = useHouseLights()
@@ -32,11 +32,14 @@ export default function TodayLayout({ section }: LayoutProps) {
   return (
     <div className="st-root">
       <header className="st-header">
-        <p className="st-wordmark">
-          <Link to="/" onClick={scene('/')}>
-            {site.name}
-          </Link>
-        </p>
+        {/* On the home page the hero already says the name */}
+        {section?.id !== 'home' && (
+          <p className="st-wordmark">
+            <Link to="/" onClick={scene('/')}>
+              {site.name}
+            </Link>
+          </p>
+        )}
 
         <nav className="st-nav" aria-label="Site">
           <ul>

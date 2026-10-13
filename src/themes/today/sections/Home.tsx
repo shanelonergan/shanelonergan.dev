@@ -1,47 +1,41 @@
+import { useState } from 'react'
 import { Link } from 'react-router'
 import { projects } from '../../../content/projects'
 import { site } from '../../../content/site'
 import { PAGE_TITLE_ID } from '../../../shared/hooks'
-import photo from '../shane.webp'
 import { useSceneChange } from '../stage'
+
+// The hero's "lights up" entrance plays once per visit, not on every return home
+let heroPlayed = false
 
 export function Home() {
   const scene = useSceneChange()
+  const [firstLook] = useState(() => {
+    const first = !heroPlayed
+    heroPlayed = true
+    return first
+  })
 
   return (
     <>
-      <section className="st-hero full-width" aria-labelledby={PAGE_TITLE_ID}>
-        {/* The spot: its own layer, drifting slowly as a transform so the stage never repaints */}
-        <div className="st-spot" aria-hidden="true" />
-        <div className="st-hero-inner">
-          <div className="st-hero-text">
-            <h1 id={PAGE_TITLE_ID} tabIndex={-1} className="st-name">
-              Shane
-              <br />
-              Lonergan
-            </h1>
-            <p className="st-lede">{site.tagline}</p>
-            {site.intro.map((p) => (
-              <p key={p}>{p}</p>
-            ))}
-            <p className="st-actions">
-              <Link className="st-button" to="/projects" onClick={scene('/projects')}>
-                See my projects
-              </Link>
-              <a className="st-button is-ghost" href={`mailto:${site.email}`}>
-                Email me
-              </a>
-            </p>
-          </div>
-          <img
-            className="st-portrait"
-            src={photo}
-            width={640}
-            height={800}
-            fetchPriority="high"
-            alt="Shane in a rust corduroy blazer and cream sweater, holding a mechanical keyboard with pastel keycaps"
-          />
-        </div>
+      <section className={`st-hero${firstLook ? ' is-first-look' : ''}`} aria-labelledby={PAGE_TITLE_ID}>
+        <h1 id={PAGE_TITLE_ID} tabIndex={-1} className="st-name">
+          Shane
+          <br />
+          Lonergan
+        </h1>
+        <p className="st-lede">{site.tagline}</p>
+        {site.intro.map((p) => (
+          <p key={p}>{p}</p>
+        ))}
+        <p className="st-actions">
+          <Link className="st-button" to="/projects" onClick={scene('/projects')}>
+            See my projects
+          </Link>
+          <a className="st-button is-ghost" href={`mailto:${site.email}`}>
+            Email me
+          </a>
+        </p>
       </section>
 
       <section className="st-section st-cue" aria-labelledby="st-recent">

@@ -1,8 +1,8 @@
 /*
  * Today, 2026: "House lights."
  *
- * The site is a stage. The hero is a dark stage under a slowly drifting
- * spot; sections fade up like lighting cues as they scroll into view; light and dark mode are the house lights going up and down.
+ * The site is a stage. The hero comes up like house lights on first look;
+ * sections fade up like lighting cues as they scroll into view; light and dark mode are the house lights going up and down.
  * Type is Qanelas Soft (Shane's pick: a round geometric sans, ExtraBold for
  * the big words and UltraLight for the quote) and Atkinson Hyperlegible Next
  * for everything you read.
@@ -307,48 +307,11 @@
   border-radius: 999px;
 }
 
-/* ---------- The hero: a stage with a follow-spot ---------- */
+/* ---------- The hero: just the name, coming up like the lights ---------- */
 
 [data-theme='today'] .st-hero {
-  position: relative;
-  isolation: isolate;
-  overflow: clip;
-  min-block-size: min(calc(100svh - 7rem), 54rem);
-  padding-block: var(--space-m-xl);
-  background: var(--st-stage);
-}
-/* The spot is a box half again as big as the stage, with the light at its
-   center. It drifts as a transform, so the stage itself is never repainted. */
-[data-theme='today'] .st-spot {
-  position: absolute;
-  inset: -25%;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(min(38rem, 70vw) min(30rem, 60vh) at 50% 50%, var(--st-glow), transparent 70%),
-    radial-gradient(min(14rem, 30vw) min(12rem, 24vh) at 50% 50%, var(--st-glow), transparent 75%);
-  translate: 10% -3%;
-  will-change: translate;
-}
-/* A whisper of velvet grain so the stage isn't a flat fill */
-[data-theme='today'] .st-hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.07;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-[data-theme='today'] .st-hero-inner {
-  grid-column: content;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: var(--space-l) var(--space-xl);
-}
-[data-theme='today'] .st-hero-text {
-  max-inline-size: 36rem;
+  max-inline-size: 40rem;
+  padding-block: var(--space-m-xl) var(--space-s);
 }
 [data-theme='today'] .st-name {
   margin: 0 0 var(--space-s);
@@ -356,14 +319,27 @@
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
+/* The first cue of the show: a short rule draws under the name */
+[data-theme='today'] .st-name::after {
+  content: '';
+  display: block;
+  inline-size: 4.5rem;
+  block-size: 4px;
+  margin-block-start: 0.25em;
+  background: var(--st-tungsten);
+  transform-origin: 0 50%;
+}
+
+/* The portrait, on the bio page */
 [data-theme='today'] .st-portrait {
-  inline-size: min(22rem, 38vw);
+  inline-size: 100%;
+  max-inline-size: 20rem;
   aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: 1.5rem;
   box-shadow: 0 0 0 1px var(--st-line);
 }
-/* With the house lights down, the portrait's gray backdrop fades into the stage */
+/* With the house lights down, the portrait's gray backdrop fades into the dark */
 [data-theme='today'][data-house='down'] .st-portrait {
   border-radius: 0;
   box-shadow: none;
@@ -696,15 +672,31 @@
 
 [data-theme='today'] .st-bio {
   display: grid;
-  grid-template-columns: minmax(0, 40rem) minmax(16rem, 1fr);
-  gap: var(--space-xl);
+  grid-template-columns: minmax(0, 40rem) minmax(16rem, 20rem);
+  grid-template-areas:
+    'title photo'
+    'prose photo'
+    'prose facts';
+  gap: var(--space-m) var(--space-xl);
   align-items: start;
+}
+[data-theme='today'] .st-bio > .st-title {
+  grid-area: title;
+  margin-block-end: 0;
+}
+[data-theme='today'] .st-bio > .st-portrait {
+  grid-area: photo;
+  margin-block-start: var(--space-m);
+  justify-self: end;
+}
+[data-theme='today'] .st-prose {
+  grid-area: prose;
 }
 [data-theme='today'] .st-prose p {
   margin: 0 0 var(--space-s);
 }
 [data-theme='today'] .st-facts {
-  margin-block-start: calc(var(--space-m) + var(--step-5) + var(--space-xs));
+  grid-area: facts;
   padding: var(--space-m);
   background: var(--st-surface);
   border-radius: 1.5rem;
@@ -764,9 +756,24 @@
 /* ---------- Scene changes ---------- */
 
 @media (prefers-reduced-motion: no-preference) {
-  /* The spot drifts slowly, on the compositor */
-  [data-theme='today'] .st-spot {
-    animation: st-drift 16s var(--ease-in-out) infinite alternate;
+  /* First look only: the hero comes up in a quick stagger, like house lights */
+  [data-theme='today'] .st-hero.is-first-look > * {
+    animation: st-lights-up 560ms var(--ease-out) both;
+  }
+  [data-theme='today'] .st-hero.is-first-look > :nth-child(2) {
+    animation-delay: 90ms;
+  }
+  [data-theme='today'] .st-hero.is-first-look > :nth-child(3) {
+    animation-delay: 160ms;
+  }
+  [data-theme='today'] .st-hero.is-first-look > :nth-child(4) {
+    animation-delay: 230ms;
+  }
+  [data-theme='today'] .st-hero.is-first-look > :nth-child(5) {
+    animation-delay: 300ms;
+  }
+  [data-theme='today'] .st-hero.is-first-look .st-name::after {
+    animation: st-rule-in 500ms var(--ease-out) 260ms both;
   }
   [data-theme='today'] :is(.st-button, .st-lights) {
     transition: transform 160ms var(--ease-out);
@@ -798,12 +805,15 @@
     transition: text-decoration-color 150ms var(--ease-out);
   }
 }
-@keyframes st-drift {
+@keyframes st-lights-up {
   from {
-    translate: 5% -8%;
+    opacity: 0;
+    translate: 0 10px;
   }
-  to {
-    translate: 16% 4%;
+}
+@keyframes st-rule-in {
+  from {
+    scale: 0 1;
   }
 }
 
@@ -845,10 +855,17 @@
   }
   [data-theme='today'] .st-bio {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'title'
+      'photo'
+      'prose'
+      'facts';
     gap: var(--space-m);
   }
-  [data-theme='today'] .st-facts {
+  [data-theme='today'] .st-bio > .st-portrait {
+    max-inline-size: 16rem;
     margin-block-start: 0;
+    justify-self: start;
   }
 }
 
@@ -873,15 +890,7 @@
     white-space: nowrap;
   }
   [data-theme='today'] .st-hero {
-    min-block-size: 0;
-  }
-  [data-theme='today'] .st-hero-inner {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-m);
-  }
-  [data-theme='today'] .st-portrait {
-    inline-size: min(16rem, 70vw);
-    justify-self: start;
+    padding-block-start: var(--space-l);
   }
   [data-theme='today'] .st-row {
     grid-template-columns: minmax(0, 1fr);

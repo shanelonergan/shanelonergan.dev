@@ -1,20 +1,17 @@
-import { useRef } from 'react'
 import { Link } from 'react-router'
 import { projects } from '../../../content/projects'
 import { site } from '../../../content/site'
 import { PAGE_TITLE_ID } from '../../../shared/hooks'
 import photo from '../shane.webp'
-import { useSceneChange, useSpotlight } from '../stage'
+import { useSceneChange } from '../stage'
 
 export function Home() {
-  const hero = useRef<HTMLElement>(null)
-  useSpotlight(hero)
   const scene = useSceneChange()
 
   return (
     <>
-      <section ref={hero} className="st-hero full-width" aria-labelledby={PAGE_TITLE_ID}>
-        {/* The follow-spot: its own layer, moved with translate so it never repaints the stage */}
+      <section className="st-hero full-width" aria-labelledby={PAGE_TITLE_ID}>
+        {/* The spot: its own layer, drifting slowly as a transform so the stage never repaints */}
         <div className="st-spot" aria-hidden="true" />
         <div className="st-hero-inner">
           <div className="st-hero-text">

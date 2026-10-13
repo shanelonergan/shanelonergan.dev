@@ -11,7 +11,7 @@ import { Home } from './sections/Home'
 import { NotFound } from './sections/NotFound'
 import { Projects } from './sections/Projects'
 import { Resume } from './sections/Resume'
-import { useHouseLights, useSceneChange } from './stage'
+import { useHouseLights, useSceneChange, useSceneCommit } from './stage'
 import './today.css'
 
 const views: Record<SectionId, () => React.JSX.Element> = {
@@ -27,6 +27,7 @@ export default function TodayLayout({ section }: LayoutProps) {
   const View = section ? views[section.id] : NotFound
   const [house, toggleHouse] = useHouseLights()
   const scene = useSceneChange()
+  useSceneCommit()
   const up = house === 'up'
 
   return (

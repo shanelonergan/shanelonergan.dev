@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useRef, useState, type MouseEvent, type RefObject } from 'react'
-import { flushSync } from 'react-dom'
-import { useNavigate } from 'react-router'
+import { useCallback, useEffect, useLayoutEffect, useState, type MouseEvent } from 'react'
+import { useLocation, useNavigate } from 'react-router'
 import { useMediaQuery, usePrefersReducedMotion } from '../../shared/hooks'
 import { safeGet, safeSet } from '../../shared/storage'
 
@@ -36,48 +35,23 @@ export function useHouseLights(): [House, () => void] {
 }
 
 /**
- * The follow-spot. On hover-capable devices the hero's --st-sx/--st-sy follow
- * the pointer; CSS eases them (@property + transition). Elsewhere a CSS
- * keyframe drifts the spot, and under reduced motion it holds still.
+ * Scene changes: in-app navigation wrapped in a view transition, when the
+ * browser supports it and motion is welcome. React Router commits navigations
+ * as a low-priority transition that flushSync can't force, so the view
+ * transition's update callback waits for the Layout's commit effect to resolve
+ * it (with a timeout, so a page can never get stuck mid-change).
  */
-export function useSpotlight(ref: RefObject<HTMLElement | null>) {
-  const canHover = useMediaQuery('(hover: hover) and (pointer: fine)')
-  const reduced = usePrefersReducedMotion()
-  const frame = useRef(0)
+let pendingScene: (() => void) | null = null
 
-  useEffect(() => {
-    const el = ref.current
-    if (!el || !canHover || reduced) return
-    const onMove = (e: PointerEvent) => {
-      cancelAnimationFrame(frame.current)
-      frame.current = requestAnimationFrame(() => {
-        const r = el.getBoundingClientRect()
-        el.style.setProperty('--st-sx', `${(((e.clientX - r.left) / r.width) * 100).toFixed(1)}%`)
-        el.style.setProperty('--st-sy', `${(((e.clientY - r.top) / r.height) * 100).toFixed(1)}%`)
-      })
-    }
-    const onLeave = () => {
-      cancelAnimationFrame(frame.current)
-      el.style.removeProperty('--st-sx')
-      el.style.removeProperty('--st-sy')
-    }
-    el.addEventListener('pointermove', onMove)
-    el.addEventListener('pointerleave', onLeave)
-    return () => {
-      cancelAnimationFrame(frame.current)
-      el.removeEventListener('pointermove', onMove)
-      el.removeEventListener('pointerleave', onLeave)
-      onLeave()
-    }
-  }, [ref, canHover, reduced])
+/** Mounted once in the Layout: resolves the pending scene change after each route commit. */
+export function useSceneCommit() {
+  const { pathname } = useLocation()
+  useLayoutEffect(() => {
+    pendingScene?.()
+    pendingScene = null
+  }, [pathname])
 }
 
-/**
- * Scene changes: in-app navigation wrapped in a view transition (a short
- * crossfade), when the browser supports it and motion is welcome. Returns
- * an onClick for a <Link>; the router still handles modified clicks and
- * browsers without the API.
- */
 export function useSceneChange() {
   const navigate = useNavigate()
   const reduced = usePrefersReducedMotion()
@@ -85,10 +59,19 @@ export function useSceneChange() {
     (to: string) => (e: MouseEvent<HTMLAnchorElement>) => {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
       if (reduced || typeof document.startViewTransition !== 'function') return
+      if (to === window.location.pathname) return
       e.preventDefault()
-      document.startViewTransition(() => {
-        flushSync(() => navigate(to))
-      })
+      document.startViewTransition(
+        () =>
+          new Promise<void>((resolve) => {
+            const timer = window.setTimeout(resolve, 600)
+            pendingScene = () => {
+              window.clearTimeout(timer)
+              resolve()
+            }
+            navigate(to)
+          }),
+      )
     },
     [navigate, reduced],
   )

@@ -1,9 +1,8 @@
 /*
  * Today, 2026: "House lights."
  *
- * The site is a stage. The hero is a dark stage with a follow-spot that
- * tracks the pointer; sections fade up like lighting cues as they scroll
- * into view; light and dark mode are the house lights going up and down.
+ * The site is a stage. The hero is a dark stage under a slowly drifting
+ * spot; sections fade up like lighting cues as they scroll into view; light and dark mode are the house lights going up and down.
  * Type is Bodoni Moda (a theater-poster didone) for the big words and
  * Atkinson Hyperlegible Next for everything you read.
  *
@@ -13,17 +12,7 @@
  * motion that is opt-in behind prefers-reduced-motion.
  */
 
-/* Registered so scripts can set them and CSS can ease them */
-@property --st-sx {
-  syntax: '<percentage>';
-  inherits: true;
-  initial-value: 66%;
-}
-@property --st-sy {
-  syntax: '<percentage>';
-  inherits: true;
-  initial-value: 44%;
-}
+/* Registered so it can be animated by scroll */
 @property --st-lit {
   syntax: '<number>';
   inherits: true;
@@ -73,6 +62,10 @@
   --st-surface: color-mix(in oklch, var(--st-fg) 5%, var(--st-bg));
   --st-glow: color-mix(in oklch, var(--st-tungsten) 32%, transparent);
   --st-glow-soft: color-mix(in oklch, var(--st-tungsten) 14%, transparent);
+  --st-cue-glow: light-dark(
+    color-mix(in oklch, var(--st-tungsten) 16%, transparent),
+    color-mix(in oklch, var(--st-tungsten) 30%, transparent)
+  );
 
   --st-sans: 'Atkinson Hyperlegible Next Variable', 'Atkinson Hyperlegible Next', system-ui, sans-serif;
   --st-display: 'Bodoni Moda Variable', 'Bodoni Moda', 'Bodoni 72', Didot, 'Times New Roman', serif;
@@ -299,8 +292,7 @@
   background: var(--st-stage);
 }
 /* The spot is a box half again as big as the stage, with the light at its
-   center, slid so that center lands on --st-sx/--st-sy. Moving it is a
-   transform, so the stage itself is never repainted. */
+   center. It drifts as a transform, so the stage itself is never repainted. */
 [data-theme='today'] .st-spot {
   position: absolute;
   inset: -25%;
@@ -309,7 +301,7 @@
   background:
     radial-gradient(min(38rem, 70vw) min(30rem, 60vh) at 50% 50%, var(--st-glow), transparent 70%),
     radial-gradient(min(14rem, 30vw) min(12rem, 24vh) at 50% 50%, var(--st-glow), transparent 75%);
-  translate: calc((var(--st-sx) - 50%) / 1.5) calc((var(--st-sy) - 50%) / 1.5);
+  translate: 10% -3%;
   will-change: translate;
 }
 /* A whisper of velvet grain so the stage isn't a flat fill */
@@ -424,15 +416,30 @@
 [data-theme='today'] .st-cue::before {
   content: '';
   position: absolute;
-  inset: calc(-1 * var(--space-s)) calc(-1 * var(--space-m));
+  inset: calc(-1 * var(--space-l)) calc(-1 * var(--space-xl));
   z-index: -1;
-  border-radius: 1.5rem;
-  background: radial-gradient(70% 60% at 0% 0%, var(--st-glow-soft), transparent 70%);
+  background: radial-gradient(50% 70% at 22% 10%, var(--st-cue-glow), transparent 70%);
+  /* Feathered on every side, so the wash never ends in a hard edge */
+  mask-image:
+    linear-gradient(to right, transparent, #000 18%, #000 82%, transparent),
+    linear-gradient(to bottom, transparent, #000 30%, #000 85%, transparent);
+  mask-composite: intersect;
   opacity: var(--st-lit);
   pointer-events: none;
 }
 [data-theme='today'] .st-cue > h2 {
   opacity: calc(0.55 + var(--st-lit) * 0.45);
+}
+/* A short tungsten rule draws itself under the heading as the cue lands */
+[data-theme='today'] .st-cue > h2::after {
+  content: '';
+  display: block;
+  inline-size: 3.5rem;
+  block-size: 3px;
+  margin-block-start: 0.3em;
+  background: var(--st-tungsten);
+  transform-origin: 0 50%;
+  scale: var(--st-lit) 1;
 }
 @keyframes st-cue-up {
   from {
@@ -447,7 +454,9 @@
     [data-theme='today'] .st-cue {
       animation: st-cue-up linear both;
       animation-timeline: view();
-      animation-range: entry 10% entry 65%;
+      /* From the section's top entering at the bottom edge to it reaching mid-screen,
+         so tall sections light up as soon as you reach them */
+      animation-range: entry 0% entry 50vh;
     }
   }
 }
@@ -733,16 +742,9 @@
 /* ---------- Scene changes ---------- */
 
 @media (prefers-reduced-motion: no-preference) {
-  [data-theme='today'] .st-hero {
-    transition:
-      --st-sx 0.6s var(--ease-out),
-      --st-sy 0.6s var(--ease-out);
-  }
-  /* No pointer to follow: the spot drifts slowly instead, on the compositor */
-  @media (hover: none) {
-    [data-theme='today'] .st-spot {
-      animation: st-drift 16s var(--ease-in-out) infinite alternate;
-    }
+  /* The spot drifts slowly, on the compositor */
+  [data-theme='today'] .st-spot {
+    animation: st-drift 16s var(--ease-in-out) infinite alternate;
   }
   [data-theme='today'] :is(.st-button, .st-lights) {
     transition: transform 160ms var(--ease-out);
@@ -783,11 +785,31 @@
   }
 }
 
-/* The crossfade between pages, when the browser can do it */
+/* Scene changes: the old page dips out, the new one comes up. Only the main
+   content takes part, so the header holds still while its underline slides. */
+[data-theme='today'] .st-main {
+  view-transition-name: st-main;
+}
 [data-theme='today']::view-transition-old(root),
 [data-theme='today']::view-transition-new(root) {
-  animation-duration: 220ms;
-  animation-timing-function: var(--ease-out);
+  animation-duration: 1ms;
+}
+[data-theme='today']::view-transition-old(st-main) {
+  animation: st-scene-out 180ms var(--ease-out) forwards;
+}
+[data-theme='today']::view-transition-new(st-main) {
+  animation: st-scene-in 360ms var(--ease-out) 120ms both;
+}
+@keyframes st-scene-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes st-scene-in {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+  }
 }
 
 /* ---------- Narrow screens ---------- */

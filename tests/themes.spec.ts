@@ -170,3 +170,30 @@ test.describe('MySpace', () => {
     expect(top8).toBeLessThan(interests)
   })
 })
+
+test.describe('Today', () => {
+  test('the house lights switch flips the scheme and is remembered', async ({ page }) => {
+    await visit(page, '/', 'today')
+    const before = await page.getAttribute('html', 'data-house')
+    await page.getByRole('switch', { name: /House lights/ }).click()
+    const after = await page.getAttribute('html', 'data-house')
+    expect(after).not.toBe(before)
+    await page.reload({ waitUntil: 'networkidle' })
+    expect(await page.getAttribute('html', 'data-house')).toBe(after)
+  })
+
+  test('the stage shows the project under the pointer', async ({ page }, info) => {
+    test.skip(info.project.name === 'phone', 'the stage is desktop-only')
+    await visit(page, '/projects', 'today')
+    await expect(page.locator('.st-stage-name')).toHaveText('Seen')
+    await page.locator('.st-project').nth(3).hover()
+    await expect(page.locator('.st-stage-name')).toHaveText('Typing Royale')
+  })
+
+  test('leaving the theme clears the house-lights attribute', async ({ page }) => {
+    await visit(page, '/', 'today')
+    await page.selectOption('#theme-select', 'netscape')
+    await expect(page.locator('html')).toHaveAttribute('data-theme', 'netscape')
+    await expect(page.locator('html')).not.toHaveAttribute('data-house', /.+/)
+  })
+})

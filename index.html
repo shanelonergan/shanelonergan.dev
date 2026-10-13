@@ -22,6 +22,22 @@
         }
         if (ids.indexOf(t) < 0) t = 'netscape'
         document.documentElement.setAttribute('data-theme', t)
+        // Non-default eras are lazy chunks. The build fills this map in, so the
+        // chosen era's code and CSS start downloading now instead of after the
+        // main bundle has run.
+        var chunks = {} /*__THEME_CHUNKS__*/
+        var c = chunks[t]
+        if (c) {
+          var add = function (rel, href, as) {
+            var l = document.createElement('link')
+            l.rel = rel
+            l.href = href
+            if (as) l.as = as
+            document.head.appendChild(l)
+          }
+          add('modulepreload', c.js)
+          for (var i = 0; i < c.css.length; i++) add('preload', c.css[i], 'style')
+        }
       })()
     </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

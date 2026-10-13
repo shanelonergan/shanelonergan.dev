@@ -1,16 +1,17 @@
 import '@fontsource-variable/atkinson-hyperlegible-next'
-import { Link } from 'react-router'
-import { site } from '../../content/site'
+import '@fontsource-variable/bodoni-moda/opsz.css'
+import { Link, NavLink } from 'react-router'
+import { sections, site } from '../../content/site'
 import type { SectionId } from '../../content/types'
 import { ThemeSwitcher, focusSwitcher } from '../../shared/ThemeSwitcher'
 import type { LayoutProps } from '../../shared/themeRegistry'
-import { Keycaps } from './Keycaps'
 import { Bio } from './sections/Bio'
 import { Contact } from './sections/Contact'
 import { Home } from './sections/Home'
 import { NotFound } from './sections/NotFound'
 import { Projects } from './sections/Projects'
 import { Resume } from './sections/Resume'
+import { useHouseLights, useSceneChange } from './stage'
 import './today.css'
 
 const views: Record<SectionId, () => React.JSX.Element> = {
@@ -21,34 +22,74 @@ const views: Record<SectionId, () => React.JSX.Element> = {
   contact: Contact,
 }
 
-/** Today, 2026: the site as Shane would build it now. Quiet type, one loud keyboard. */
+/** Today, 2026: the site as a stage. House lights, a follow-spot, lighting cues. */
 export default function TodayLayout({ section }: LayoutProps) {
   const View = section ? views[section.id] : NotFound
+  const [house, toggleHouse] = useHouseLights()
+  const scene = useSceneChange()
+  const up = house === 'up'
+
   return (
-    <div className="td-page">
-      <header className="td-header">
-        {/* On the home page the hero already says the name, so the wordmark steps aside */}
-        {section?.id === 'home' ? (
-          <span />
-        ) : (
-          <p className="td-wordmark">
-            <Link to="/">{site.name}</Link>
-          </p>
-        )}
-        <ThemeSwitcher className="td-switcher" />
+    <div className="st-root">
+      <header className="st-header">
+        <p className="st-wordmark">
+          <Link to="/" onClick={scene('/')}>
+            {site.name}
+          </Link>
+        </p>
+
+        <nav className="st-nav" aria-label="Site">
+          <ul>
+            {sections
+              .filter((s) => s.id !== 'home')
+              .map((s) => (
+                <li key={s.id}>
+                  <NavLink to={s.path} end onClick={scene(s.path)}>
+                    {s.label}
+                  </NavLink>
+                </li>
+              ))}
+          </ul>
+        </nav>
+
+        <div className="st-controls">
+          <button
+            type="button"
+            className="st-lights"
+            role="switch"
+            aria-checked={up}
+            onClick={toggleHouse}
+            title={up ? 'Bring the house lights down' : 'Bring the house lights up'}
+          >
+            <span className="st-lamp" aria-hidden="true" />
+            <span>
+              House lights <b>{house}</b>
+            </span>
+          </button>
+          <ThemeSwitcher className="st-switcher" />
+        </div>
       </header>
 
-      <Keycaps />
-
-      <main id="main" className="td-main">
+      <main id="main" className="st-main">
         <View />
       </main>
 
-      <footer className="td-footer">
-        <p>
-          Every era of this site is hand-built, from a 1995 home page to this one.{' '}
-          <button type="button" className="td-text-button" onClick={focusSwitcher}>
-            Visit another era
+      <footer className="st-footer">
+        <ul className="st-footer-links">
+          <li>
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+          </li>
+          <li>
+            <a href={site.github}>GitHub</a>
+          </li>
+          <li>
+            <a href={site.linkedin}>LinkedIn</a>
+          </li>
+        </ul>
+        <p className="st-footer-note">
+          This site has five eras, from a 1995 home page to this one.{' '}
+          <button type="button" className="st-text-button" onClick={focusSwitcher}>
+            Pick another era
           </button>
         </p>
       </footer>

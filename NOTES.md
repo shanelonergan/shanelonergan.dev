@@ -197,18 +197,26 @@ Still open:
   - The Friends avatars stretched to card height.
   - axe flagged the Companies and Schools tables as unfocusable scroll areas on phones, so cells now wrap there and the wrappers are focusable regions.
 
-## Today (2026), added 2026-10-09
+## Today (2026), rebuilt 2026-10-13: "House lights"
 
-- **Shane's picks:** label it "Today (2026)" and keep Netscape as the default. The id is `today`, so the shareable link is `?theme=today`.
-- **Design plan,** reviewed against generic portfolio defaults:
-  - **Color:** fog gray `#e9ecf0`, ink `#161a20`, slate `#3c4450` and line `#c3c8d0`, plus five keycap pastels taken from the keyboard in Shane's portrait: petal `#f6b8cb`, butter `#f6e08c`, mint `#a9e0b4`, aqua `#93d5e2`, lilac `#c9b6f0`. Dark mode follows `prefers-color-scheme`.
-  - **Avoided:** the rust blazer plus cream sweater would have pushed toward the cream-and-terracotta cliché, so the color comes from the keycaps instead.
-  - **Type:** one family, Atkinson Hyperlegible Next Variable (OFL, `@fontsource-variable`, latin subset only). It's the Braille Institute's legibility face, which fits a site that's strict about accessibility. The name is set at 800 weight, tight, up to 6.75rem; body is 18px with 1.6 line-height.
-  - **The one loud element:** the nav is a row of pastel keycaps with legends H/P/R/B/C. Each has a solid darker "skirt" made with `color-mix`, and it presses down (4px) on `:active` and stays pressed for the current page. That's the only motion, and it's user-triggered; reduced motion removes the transition.
-  - **Everything else is quiet:** project, résumé and education entries are rows with the year or dates in a margin column (a real sequence), not a card grid. There are no all-caps labels, no middot meta strings, and no → arrows.
-- **Photo:** a separate 4:5 crop at 640×800 WebP (34KB), re-encoded through canvas so there's no metadata, in `src/themes/today/shane.webp`.
-- **Fixes after the first screenshots:**
-  - The wordmark duplicated the huge name on home, so it's hidden on home only.
-  - The photo floated vertically centered next to the text, so it's now top-aligned.
-  - The switcher arrow rendered badly with rem sizing, so it uses whole pixels.
-  - The bio's whole first paragraph was set as an intro and was too heavy, so it's back to body text.
+Shane found the first version (gray page, keycap nav) boring and asked for something beautiful, interactive and immersive, using the frontend-design skill and good-css.com. This replaced it entirely.
+
+- **Concept:** the site is a stage. The hero is a dark stage with a follow-spot that tracks the pointer; sections fade up like lighting cues as they scroll into view; dark and light mode are the house lights going down and up; page changes crossfade like scene changes.
+- **The one loud thing** is the spot and the portrait fading into the dark. Everything else is quiet rows and generous space.
+- **Color (OKLCH, `light-dark()`):** show mode is ink-plum `oklch(0.17 0.025 300)` with a tungsten light `oklch(0.85 0.14 80)`; house-up is a cool near-white `oklch(0.985 0.004 260)` with a pale-slate stage `oklch(0.925 0.012 265)`, the color of the portrait's own backdrop, so the warm light reads as light rather than as a beige page. Velvet red is only the focus ring and the lamp.
+  - The first pass had a warm cream stage in light mode. It looked like the cream-and-terracotta template, so it went cool.
+- **Type:** Bodoni Moda Variable (OFL, `opsz.css`, latin ~48KB) for the name, titles, the pull quote and the email; Atkinson Hyperlegible Next for everything read. Fluid Utopia scale on `[data-theme='today']` with `pow()`; the biggest step stays under 2.5× its minimum.
+- **Techniques from good-css:** a content grid with a `full-width` breakout for the hero; `@property`-registered `--st-sx/--st-sy` so the script only sets the spot position and CSS eases it; `@property --st-lit` driven by `animation-timeline: view()` for the cues (gated behind `prefers-reduced-motion: no-preference` and `@supports`); an anchor-positioned sliding underline in the nav with weight as the fallback cue; `overflow: clip` on the root; `:focus-visible` rings; press feedback at 0.97; hover only under `(hover: hover) and (pointer: fine)`.
+- **Scene changes:** `useSceneChange()` wraps `navigate()` in `document.startViewTransition` + `flushSync` when the API exists and motion is welcome. React Router 8's `viewTransition` prop needs a data router, and this site uses `<BrowserRouter>`, so the wrapper is the simplest path.
+- **House lights:** `useHouseLights()` sets `data-house` on `<html>` (so the body background follows), follows the system until the switch is used, remembers the choice in localStorage (`house-lights`), and removes the attribute when the theme unmounts. It's a `role="switch"`; on phones only the lamp shows and the text stays for screen readers.
+- **Lighting cues and contrast:** only the wash and the h2's opacity (0.55 → 1) are animated; body text never dims, so axe passes with sections unlit.
+- **The spot on touch:** no pointer to follow, so a keyframe drifts it (`(hover: none)`), and reduced motion holds it still.
+- **Projects:** rows with a year margin, whole-row link from the title (good-css card-link pattern), a left-edge glow on the lit row, and a sticky, `aria-hidden` "stage" aside (always dark, via `color-scheme: dark`) that shows the project under the pointer or focus. It's hidden under 60rem.
+- **Checks:** axe clean in both schemes at 390 and 1280; tests cover the switch persisting, the stage following hover, and the attribute cleanup.
+
+## Lazy eras are preloaded from the inline script (2026-10-13)
+
+- `scripts/build.mjs` builds with `manifest: true`, maps each `src/themes/<id>/Layout.tsx` dynamic entry to its JS and CSS, and injects the map into the inline theme script in `index.html` (placeholder `{} /*__THEME_CHUNKS__*/`). The script adds `<link rel="modulepreload">` and `<link rel="preload" as="style">` for the chosen era before any CSS is parsed, so a `?theme=` visit no longer waits for the main bundle to run before its era's code starts downloading.
+- Confirmed in Playwright: the request order is `index.js → index.css → Layout.js → Layout.css → …`, with the preload links in `<head>`.
+- **Measuring on this Mac is unreliable while an iOS Simulator is running** (`mediaanalysisd` at 300%+, load average over 100). Lighthouse mobile swung from 58 to 94 on identical builds, and the static Netscape page "scored" 76 with 1.2s of blocking time it cannot have. Use PageSpeed Insights against a Netlify draft instead.
+- The one real mobile cost found: the touch-device spot drift animated gradient positions on the hero, repainting it every frame. The spot is now its own layer moved with `translate`, so the drift runs on the compositor.

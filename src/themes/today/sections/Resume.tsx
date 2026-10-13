@@ -5,33 +5,33 @@ import { PAGE_TITLE_ID } from '../../../shared/hooks'
 export function Resume() {
   return (
     <>
-      <h1 id={PAGE_TITLE_ID} tabIndex={-1} className="td-title">
-        Résumé
-      </h1>
-      {site.resumePdf && (
-        <p>
-          <a className="td-button" href={site.resumePdf}>
+      <div className="st-title-row">
+        <h1 id={PAGE_TITLE_ID} tabIndex={-1} className="st-title">
+          Résumé
+        </h1>
+        {site.resumePdf && (
+          <a className="st-button is-ghost" href={site.resumePdf}>
             Download the PDF
           </a>
-        </p>
-      )}
+        )}
+      </div>
 
-      <section className="td-section" aria-labelledby="td-experience">
-        <h2 id="td-experience">Experience</h2>
-        <ol className="td-rows">
+      <section className="st-section st-cue" aria-labelledby="st-experience">
+        <h2 id="st-experience">Experience</h2>
+        <ol className="st-rows">
           {experience.map((r) => (
-            <li key={r.company + r.start} className="td-row">
-              <span className="td-year">
+            <li key={r.company + r.start} className="st-row">
+              <span className="st-year">
                 {r.start}
-                <br />
-                to {r.end}
+                <span className="st-year-to"> to </span>
+                {r.end}
               </span>
               <div>
-                <h3 className="td-row-title">
+                <h3 className="st-row-title">
                   {r.role}, {r.company}
                 </h3>
                 {r.summary && <p>{r.summary}</p>}
-                <ul className="td-list">
+                <ul className="st-list">
                   {r.highlights.map((h) => (
                     <li key={h}>{h}</li>
                   ))}
@@ -42,14 +42,14 @@ export function Resume() {
         </ol>
       </section>
 
-      <section className="td-section" aria-labelledby="td-education">
-        <h2 id="td-education">Education</h2>
-        <ol className="td-rows">
+      <section className="st-section st-cue" aria-labelledby="st-education">
+        <h2 id="st-education">Education</h2>
+        <ol className="st-rows">
           {education.map((e) => (
-            <li key={e.school} className="td-row">
-              <span className="td-year">{e.year}</span>
+            <li key={e.school} className="st-row">
+              <span className="st-year">{e.year}</span>
               <div>
-                <h3 className="td-row-title">{e.school}</h3>
+                <h3 className="st-row-title">{e.school}</h3>
                 <p>{e.program}</p>
               </div>
             </li>
@@ -57,9 +57,13 @@ export function Resume() {
         </ol>
       </section>
 
-      <section className="td-section" aria-labelledby="td-skills">
-        <h2 id="td-skills">Skills</h2>
-        <p>{skills.join(', ')}</p>
+      <section className="st-section st-cue" aria-labelledby="st-skills">
+        <h2 id="st-skills">Skills</h2>
+        <ul className="st-pills is-large">
+          {skills.map((s) => (
+            <li key={s}>{s}</li>
+          ))}
+        </ul>
       </section>
     </>
   )

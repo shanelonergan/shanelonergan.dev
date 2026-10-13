@@ -11,7 +11,7 @@ const ssrOut = resolve(root, 'node_modules/.ssr')
 
 process.env.BUILD_DATE = new Date().toISOString()
 
-await build({ root, logLevel: 'warn' })
+await build({ root, logLevel: 'warn', build: { manifest: true } })
 await build({
   root,
   logLevel: 'warn',
@@ -19,7 +19,19 @@ await build({
 })
 
 const { render, routes } = await import(pathToFileURL(resolve(ssrOut, 'entry-server.js')).href)
-const template = await readFile(resolve(dist, 'index.html'), 'utf8')
+// Tell the inline theme script where each lazy era's chunk and CSS live
+const manifest = JSON.parse(await readFile(resolve(dist, '.vite/manifest.json'), 'utf8'))
+const chunks = {}
+for (const [src, entry] of Object.entries(manifest)) {
+  const m = /^src\/themes\/([a-z0-9]+)\/Layout\.tsx$/.exec(src)
+  if (m && entry.isDynamicEntry) chunks[m[1]] = { js: `/${entry.file}`, css: (entry.css ?? []).map((f) => `/${f}`) }
+}
+await rm(resolve(dist, '.vite'), { recursive: true, force: true })
+const template = (await readFile(resolve(dist, 'index.html'), 'utf8')).replace(
+  '{} /*__THEME_CHUNKS__*/',
+  JSON.stringify(chunks),
+)
+console.log(`theme chunks: ${Object.keys(chunks).join(', ')}`)
 
 for (const route of routes) {
   const { html, head } = render(route)

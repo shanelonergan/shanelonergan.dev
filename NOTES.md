@@ -240,3 +240,15 @@ Shane found the first version (gray page, keycap nav) boring and asked for somet
 - **The one page-load moment:** on first look, the hero's children come up in a 560ms stagger (opacity and a 10px rise) and the rule draws in, like house lights. A module-level flag means it plays once per visit, not every time you return home. Reduced motion: static.
 - **Portrait on Bio:** the bio is a named-area grid (`title photo / prose photo / prose facts`), so the photo sits top-right beside the opening paragraphs on desktop and between the title and the prose on phones. It keeps the feathered mask when the house is down and the rounded frame when it's up.
 - The wordmark is omitted on the home page (the hero says the name); it's back on every other page.
+
+## Lighthouse on the live site, quiet machine (2026-10-14)
+
+Measured against https://shanelonergan.dev with the simulator off (load average ~4). Lighthouse 12, Chrome for Testing.
+
+| Page | Mobile (3 runs) | Desktop |
+|---|---|---|
+| Today `/` | 90, 100, 98 (TBT 0–20ms, LCP 1.4–1.7s, CLS 0) | 98 (LCP 0.5s) |
+| Netscape `/` | 100 | |
+| MySpace `/` | 100 | 99 |
+
+Accessibility, best practices and SEO: 100 everywhere. The earlier 58–75 mobile scores were entirely the overloaded machine.

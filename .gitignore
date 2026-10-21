@@ -28,3 +28,6 @@ playwright-report/
 
 # Licensed font: allowed on the site via @font-face, not for redistribution
 public/fonts/qanelas/
+
+# Netlify CLI state
+.netlify/

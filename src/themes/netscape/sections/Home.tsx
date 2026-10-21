@@ -45,7 +45,7 @@ export function Home() {
       <h2>My .plan</h2>
       <figure className="ns-plan">
         <figcaption>
-          <code>% finger shane@shanelonergan.dev</code>
+          <code>% shane@shanelonergan.dev</code>
         </figcaption>
         <pre>
           {/* finger's two-column header; the columns stack on narrow screens */}

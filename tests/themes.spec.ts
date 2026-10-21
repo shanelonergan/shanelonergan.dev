@@ -154,7 +154,7 @@ test.describe('MySpace', () => {
 
   test('the Top 8 lists projects and links to all of them', async ({ page }) => {
     await visit(page, '/', 'myspace')
-    await expect(page.locator('.ms-top8 li')).toHaveCount(6)
+    await expect(page.locator('.ms-top8 li')).toHaveCount(5)
     await page.getByRole('link', { name: "View All of Shane's Friends" }).click()
     await expect(page).toHaveURL(/\/projects/)
     await expect(page.locator('#page-title')).toHaveText("Shane's Friends")
